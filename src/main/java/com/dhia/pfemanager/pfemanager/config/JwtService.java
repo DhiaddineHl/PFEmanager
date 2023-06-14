@@ -1,5 +1,6 @@
 package com.dhia.pfemanager.pfemanager.config;
 
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -17,7 +18,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "zxbveNYqtVaVoxJQOlXBjuMaktbPOs1j";
+    private static final String SECRET_KEY = "3e58950f9b875dddf66b25bd1b846e78c8c2bb923ee8cbd7f72695aefb626be3";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
