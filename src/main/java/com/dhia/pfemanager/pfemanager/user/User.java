@@ -1,6 +1,7 @@
 package com.dhia.pfemanager.pfemanager.user;
 
 
+import com.dhia.pfemanager.pfemanager.token.Token;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +30,9 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private String speciality;
+
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
