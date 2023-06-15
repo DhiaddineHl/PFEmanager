@@ -1,6 +1,7 @@
 package com.dhia.pfemanager.pfemanager.authentication;
 
 
+import com.dhia.pfemanager.pfemanager.authentication.requests.*;
 import com.dhia.pfemanager.pfemanager.config.JwtService;
 import com.dhia.pfemanager.pfemanager.token.Token;
 import com.dhia.pfemanager.pfemanager.token.TokenRepository;
@@ -8,6 +9,9 @@ import com.dhia.pfemanager.pfemanager.token.TokenType;
 import com.dhia.pfemanager.pfemanager.user.User;
 import com.dhia.pfemanager.pfemanager.user.UserRepository;
 import com.dhia.pfemanager.pfemanager.user.UserRole;
+import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
+import com.dhia.pfemanager.pfemanager.user.intern.Intern;
+import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,10 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -35,24 +36,98 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
 
-    public AuthenticationResponse register(RegisterRequest registerRequest) {
+//    public AuthenticationResponse register(RegisterRequest registerRequest) {
+//        Optional<User> userOptional = repository.findUserByEmail(registerRequest.getEmail());
+//        if (userOptional.isPresent()){
+//            throw new IllegalStateException("Email is already taken");
+//        }
+//        var user = User.builder()
+//                .name(registerRequest.getName())
+//                .email(registerRequest.getEmail())
+//                .password(passwordEncoder.encode(registerRequest.getPassword()))
+//                .phone(registerRequest.getPhone())
+//                .speciality(registerRequest.getSpeciality())
+//                .role(UserRole.Intern)
+//                .build();
+//        var savedUser = repository.save(user);
+//        var jwtToken = jwtService.generateToken(user);
+//        var refreshToken = jwtService.generateRefreshToken(user);
+//        saveUserToken(savedUser, jwtToken);
+//
+//        return AuthenticationResponse.builder()
+//                .accessToken(jwtToken)
+//                .refreshToken(refreshToken)
+//                .build();
+//    }
+
+    public AuthenticationResponse enterpriseRegister(EnterpriseRegisterRequest registerRequest) {
         Optional<User> userOptional = repository.findUserByEmail(registerRequest.getEmail());
         if (userOptional.isPresent()){
             throw new IllegalStateException("Email is already taken");
         }
-        var user = User.builder()
-                .firstName(registerRequest.getFirstName())
-                .lastName(registerRequest.getLastName())
+        var enterprise = Enterprise.builder()
+                .name(registerRequest.getName())
+                .email(registerRequest.getEmail())
+                .password(passwordEncoder.encode(registerRequest.getPassword()))
+                .phone(registerRequest.getPhone())
+                .speciality(registerRequest.getSpeciality())
+                .role(UserRole.Enterprise)
+                .field(registerRequest.getField())
+                .build();
+        var savedEnterprise = repository.save(enterprise);
+        var jwtToken = jwtService.generateToken(enterprise);
+        var refreshToken = jwtService.generateRefreshToken(enterprise);
+        saveUserToken(savedEnterprise, jwtToken);
+
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .build();
+    }
+
+
+    public AuthenticationResponse internRegister(InternRegisterRequest registerRequest) {
+        Optional<User> userOptional = repository.findUserByEmail(registerRequest.getEmail());
+        if (userOptional.isPresent()){
+            throw new IllegalStateException("Email is already taken");
+        }
+        var intern = Intern.builder()
+                .name(registerRequest.getName())
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .phone(registerRequest.getPhone())
                 .speciality(registerRequest.getSpeciality())
                 .role(UserRole.Intern)
                 .build();
-        var savedUser = repository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
-        saveUserToken(savedUser, jwtToken);
+        var savedIntern = repository.save(intern);
+        var jwtToken = jwtService.generateToken(intern);
+        var refreshToken = jwtService.generateRefreshToken(intern);
+        saveUserToken(savedIntern, jwtToken);
+
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .build();
+    }
+
+    public AuthenticationResponse supervisorRegister(SupervisorRegisterRequest registerRequest) {
+        Optional<User> userOptional = repository.findUserByEmail(registerRequest.getEmail());
+        if (userOptional.isPresent()){
+            throw new IllegalStateException("Email is already taken");
+        }
+        var supervisor = Supervisor.builder()
+                .name(registerRequest.getName())
+                .email(registerRequest.getEmail())
+                .password(passwordEncoder.encode(registerRequest.getPassword()))
+                .phone(registerRequest.getPhone())
+                .speciality(registerRequest.getSpeciality())
+                .role(UserRole.Supervisor)
+                .type(registerRequest.getType())
+                .build();
+        var savedSupervisor = repository.save(supervisor);
+        var jwtToken = jwtService.generateToken(supervisor);
+        var refreshToken = jwtService.generateRefreshToken(supervisor);
+        saveUserToken(savedSupervisor, jwtToken);
 
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)

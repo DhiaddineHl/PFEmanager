@@ -25,7 +25,7 @@ public class Enterprise extends User {
 
     private UserRole role = UserRole.Enterprise;
 
-
+    private String field;
     @OneToMany(mappedBy = "enterprise")
     private List<Intern> internList;
     @OneToMany(mappedBy = "enterprise")

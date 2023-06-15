@@ -1,4 +1,5 @@
-package com.dhia.pfemanager.pfemanager.authentication;
+package com.dhia.pfemanager.pfemanager.authentication.requests;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +10,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class EnterpriseRegisterRequest {
 
+    private String name;
     private String email;
     private String password;
+    private String phone;
+    private String speciality;
+    private String field;
 
 }

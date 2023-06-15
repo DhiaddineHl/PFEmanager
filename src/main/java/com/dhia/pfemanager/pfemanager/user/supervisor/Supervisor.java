@@ -22,6 +22,8 @@ public class Supervisor extends User {
 
     private UserRole role = UserRole.Supervisor;
 
+    private String type;
+
     @ManyToOne
     @JoinColumn(name = "enterprise_name")
     private Enterprise enterprise;
