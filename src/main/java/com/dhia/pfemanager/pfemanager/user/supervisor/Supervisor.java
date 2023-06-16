@@ -1,5 +1,6 @@
 package com.dhia.pfemanager.pfemanager.user.supervisor;
 
+import com.dhia.pfemanager.pfemanager.activity.Task;
 import com.dhia.pfemanager.pfemanager.user.User;
 import com.dhia.pfemanager.pfemanager.user.UserRole;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
@@ -28,5 +29,8 @@ public class Supervisor extends User {
 
     @ManyToMany(mappedBy = "supervisors")
     private List<Intern> internList;
+
+    @OneToMany(mappedBy = "assigner")
+    private List<Task> assignedTasks;
 
 }

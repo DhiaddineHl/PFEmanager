@@ -1,5 +1,6 @@
 package com.dhia.pfemanager.pfemanager.user.intern;
 
+import com.dhia.pfemanager.pfemanager.activity.Activity;
 import com.dhia.pfemanager.pfemanager.user.User;
 import com.dhia.pfemanager.pfemanager.user.UserRole;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
@@ -22,7 +23,7 @@ public class Intern extends User {
 
 
     @ManyToOne
-    @JoinColumn(name = "enterprise_name")
+    @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
 
     @ManyToMany
@@ -32,5 +33,8 @@ public class Intern extends User {
             inverseJoinColumns = @JoinColumn(name = "intern_id")
     )
     private List<Supervisor> supervisors;
+
+    @OneToMany(mappedBy = "intern")
+    private List<Activity> internshipJournal;
 
 }
