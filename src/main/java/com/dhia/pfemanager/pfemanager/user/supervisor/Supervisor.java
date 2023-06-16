@@ -20,8 +20,6 @@ import java.util.List;
 @Table(name = "supervisor")
 public class Supervisor extends User {
 
-    private UserRole role = UserRole.Supervisor;
-
     private String type;
 
     @ManyToOne

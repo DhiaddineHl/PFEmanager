@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "owner")
 public class SuperAdmin extends User {
 
-    private UserRole role = UserRole.SuperAdmin;
+    private UserRole role = UserRole.SUPER_ADMIN;
 
 
 }

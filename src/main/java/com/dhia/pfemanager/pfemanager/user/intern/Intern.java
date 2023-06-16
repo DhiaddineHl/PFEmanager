@@ -20,7 +20,6 @@ import java.util.List;
 @Table(name = "intern")
 public class Intern extends User {
 
-    private UserRole role = UserRole.Intern;
 
     @ManyToOne
     @JoinColumn(name = "enterprise_name")

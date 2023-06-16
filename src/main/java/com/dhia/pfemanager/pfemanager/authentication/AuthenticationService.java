@@ -71,7 +71,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .phone(registerRequest.getPhone())
                 .speciality(registerRequest.getSpeciality())
-                .role(UserRole.Enterprise)
+                .role(UserRole.ENTERPRISE)
                 .field(registerRequest.getField())
                 .build();
         var savedEnterprise = repository.save(enterprise);
@@ -97,7 +97,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .phone(registerRequest.getPhone())
                 .speciality(registerRequest.getSpeciality())
-                .role(UserRole.Intern)
+                .role(UserRole.INTERN)
                 .build();
         var savedIntern = repository.save(intern);
         var jwtToken = jwtService.generateToken(intern);
@@ -121,7 +121,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .phone(registerRequest.getPhone())
                 .speciality(registerRequest.getSpeciality())
-                .role(UserRole.Supervisor)
+                .role(UserRole.SUPERVISOR)
                 .type(registerRequest.getType())
                 .build();
         var savedSupervisor = repository.save(supervisor);
