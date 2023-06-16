@@ -10,7 +10,9 @@ import com.dhia.pfemanager.pfemanager.user.User;
 import com.dhia.pfemanager.pfemanager.user.UserRepository;
 import com.dhia.pfemanager.pfemanager.user.UserRole;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
+import com.dhia.pfemanager.pfemanager.user.enterprise.EnterpriseRepository;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
+import com.dhia.pfemanager.pfemanager.user.owner.SuperAdmin;
 import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,6 +33,7 @@ public class AuthenticationService {
 
     private final UserRepository repository;
     private final TokenRepository tokenRepository;
+    private final EnterpriseRepository enterpriseRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
@@ -70,7 +73,6 @@ public class AuthenticationService {
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .phone(registerRequest.getPhone())
-                .speciality(registerRequest.getSpeciality())
                 .role(UserRole.ENTERPRISE)
                 .field(registerRequest.getField())
                 .build();
@@ -91,12 +93,14 @@ public class AuthenticationService {
         if (userOptional.isPresent()){
             throw new IllegalStateException("Email is already taken");
         }
+        var enterprise = enterpriseRepository.findEnterpriseByEmail(registerRequest.getEnterpriseEmail());
         var intern = Intern.builder()
                 .name(registerRequest.getName())
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .phone(registerRequest.getPhone())
                 .speciality(registerRequest.getSpeciality())
+                .enterprise(enterprise)
                 .role(UserRole.INTERN)
                 .build();
         var savedIntern = repository.save(intern);
@@ -115,6 +119,7 @@ public class AuthenticationService {
         if (userOptional.isPresent()){
             throw new IllegalStateException("Email is already taken");
         }
+        var enterprise = enterpriseRepository.findEnterpriseByEmail(registerRequest.getEnterpriseEmail());
         var supervisor = Supervisor.builder()
                 .name(registerRequest.getName())
                 .email(registerRequest.getEmail())
@@ -122,6 +127,7 @@ public class AuthenticationService {
                 .phone(registerRequest.getPhone())
                 .speciality(registerRequest.getSpeciality())
                 .role(UserRole.SUPERVISOR)
+                .enterprise(enterprise)
                 .type(registerRequest.getType())
                 .build();
         var savedSupervisor = repository.save(supervisor);

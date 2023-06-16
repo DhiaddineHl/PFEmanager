@@ -16,7 +16,6 @@ public class EnterpriseRegisterRequest {
     private String email;
     private String password;
     private String phone;
-    private String speciality;
     private String field;
 
 }

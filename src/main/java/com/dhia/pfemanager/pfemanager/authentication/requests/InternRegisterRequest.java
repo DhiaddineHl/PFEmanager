@@ -17,5 +17,6 @@ public class InternRegisterRequest {
     private String password;
     private String phone;
     private String speciality;
+    private String enterpriseEmail;
 
 }

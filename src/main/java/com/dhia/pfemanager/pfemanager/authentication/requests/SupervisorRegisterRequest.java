@@ -1,6 +1,7 @@
 package com.dhia.pfemanager.pfemanager.authentication.requests;
 
 
+import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +19,6 @@ public class SupervisorRegisterRequest {
     private String phone;
     private String speciality;
     private String type;
+    private String enterpriseEmail;
 
 }

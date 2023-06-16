@@ -4,10 +4,9 @@ package com.dhia.pfemanager.pfemanager.user.enterprise;
 import com.dhia.pfemanager.pfemanager.user.User;
 import com.dhia.pfemanager.pfemanager.user.UserRole;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
+import com.dhia.pfemanager.pfemanager.user.owner.SuperAdmin;
 import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +27,9 @@ public class Enterprise extends User {
     private List<Intern> internList;
     @OneToMany(mappedBy = "enterprise")
     private List<Supervisor> supervisorList;
+
+    @ManyToOne
+    @JoinColumn(name = "superAdmin_id")
+    private SuperAdmin applicationOwner;
 
 }
