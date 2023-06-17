@@ -15,10 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.dhia.pfemanager.pfemanager.user.Permission.ENTERPRISE_READ;
-import static com.dhia.pfemanager.pfemanager.user.Permission.INTERN_READ;
-import static com.dhia.pfemanager.pfemanager.user.UserRole.ENTERPRISE;
-import static com.dhia.pfemanager.pfemanager.user.UserRole.INTERN;
+import static com.dhia.pfemanager.pfemanager.user.Permission.*;
+import static com.dhia.pfemanager.pfemanager.user.UserRole.*;
 
 
 @Configuration
@@ -42,6 +40,9 @@ public class SecurityConfiguration {
 
                         .requestMatchers("/api/v1/demo/enterprise/**").hasRole(ENTERPRISE.name())
                         .requestMatchers(HttpMethod.GET,"/api/v1/demo/enterprise/**").hasAuthority(ENTERPRISE_READ.name())
+
+                        .requestMatchers("/api/v1/admin-dashboard/**").hasRole(SUPER_ADMIN.name())
+                        .requestMatchers(HttpMethod.GET,"/api/v1/admin-dashboard/**").hasAuthority(SUPER_ADMIN_READ.name())
 
                         .anyRequest().authenticated()
                 )

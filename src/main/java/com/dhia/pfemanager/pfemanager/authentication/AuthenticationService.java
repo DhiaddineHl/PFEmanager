@@ -13,6 +13,7 @@ import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.enterprise.EnterpriseRepository;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import com.dhia.pfemanager.pfemanager.user.owner.SuperAdmin;
+import com.dhia.pfemanager.pfemanager.user.owner.SuperAdminRepository;
 import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,34 +35,33 @@ public class AuthenticationService {
     private final UserRepository repository;
     private final TokenRepository tokenRepository;
     private final EnterpriseRepository enterpriseRepository;
+    private final SuperAdminRepository superAdminRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
 
-//    public AuthenticationResponse register(RegisterRequest registerRequest) {
-//        Optional<User> userOptional = repository.findUserByEmail(registerRequest.getEmail());
-//        if (userOptional.isPresent()){
-//            throw new IllegalStateException("Email is already taken");
+    public AuthenticationResponse adminRegister(AdminRegisterRequest registerRequest) {
+//        if (superAdminRepository.loadAdmin().size() == 1){
+//            throw new IllegalStateException("The super admin user already exist");
 //        }
-//        var user = User.builder()
-//                .name(registerRequest.getName())
-//                .email(registerRequest.getEmail())
-//                .password(passwordEncoder.encode(registerRequest.getPassword()))
-//                .phone(registerRequest.getPhone())
-//                .speciality(registerRequest.getSpeciality())
-//                .role(UserRole.Intern)
-//                .build();
-//        var savedUser = repository.save(user);
-//        var jwtToken = jwtService.generateToken(user);
-//        var refreshToken = jwtService.generateRefreshToken(user);
-//        saveUserToken(savedUser, jwtToken);
-//
-//        return AuthenticationResponse.builder()
-//                .accessToken(jwtToken)
-//                .refreshToken(refreshToken)
-//                .build();
-//    }
+        var user = SuperAdmin.builder()
+                .name(registerRequest.getName())
+                .email(registerRequest.getEmail())
+                .password(passwordEncoder.encode(registerRequest.getPassword()))
+                .phone(registerRequest.getPhone())
+                .role(UserRole.SUPER_ADMIN)
+                .build();
+        var savedUser = repository.save(user);
+        var jwtToken = jwtService.generateToken(user);
+        var refreshToken = jwtService.generateRefreshToken(user);
+        saveUserToken(savedUser, jwtToken);
+
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .build();
+    }
 
     public AuthenticationResponse enterpriseRegister(EnterpriseRegisterRequest registerRequest) {
         Optional<User> userOptional = repository.findUserByEmail(registerRequest.getEmail());
