@@ -1,6 +1,6 @@
 package com.dhia.pfemanager.pfemanager.token;
 
-import com.dhia.pfemanager.pfemanager.user.User;
+import com.dhia.pfemanager.pfemanager.user.appUser.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

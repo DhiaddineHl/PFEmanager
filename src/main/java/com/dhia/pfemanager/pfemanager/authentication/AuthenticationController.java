@@ -2,6 +2,7 @@ package com.dhia.pfemanager.pfemanager.authentication;
 
 
 import com.dhia.pfemanager.pfemanager.authentication.requests.*;
+import com.dhia.pfemanager.pfemanager.user.exceptions.EmailTakenException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -20,30 +21,30 @@ public class AuthenticationController {
 
     private final AuthenticationService authService;
 
-//    @PostMapping("/register")
-//    public ResponseEntity<AuthenticationResponse> register(
-//            @RequestBody RegisterRequest registerRequest
-//    ){
-//        return ResponseEntity.ok(authService.register(registerRequest));
-//    };
+    @PostMapping("/register/super_admin")
+    public ResponseEntity<AuthenticationResponse> adminRegister(
+            @RequestBody AdminRegisterRequest registerRequest
+    ){
+        return ResponseEntity.ok(authService.adminRegister(registerRequest));
+    };
     @PostMapping("/register/enterprise")
     public ResponseEntity<AuthenticationResponse> enterpriseRegister(
             @RequestBody EnterpriseRegisterRequest registerRequest
-    ){
+    ) throws EmailTakenException {
         return ResponseEntity.ok(authService.enterpriseRegister(registerRequest));
     };
 
     @PostMapping("/register/intern")
     public ResponseEntity<AuthenticationResponse> interRegister(
             @RequestBody InternRegisterRequest registerRequest
-    ){
+    ) throws EmailTakenException {
         return ResponseEntity.ok(authService.internRegister(registerRequest));
     };
 
     @PostMapping("/register/supervisor")
     public ResponseEntity<AuthenticationResponse> supervisorRegister(
             @RequestBody SupervisorRegisterRequest registerRequest
-    ){
+    ) throws EmailTakenException {
         return ResponseEntity.ok(authService.supervisorRegister(registerRequest));
     };
 

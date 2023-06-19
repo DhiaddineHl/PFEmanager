@@ -1,11 +1,11 @@
 package com.dhia.pfemanager.pfemanager.user.enterprise;
 
 
-import com.dhia.pfemanager.pfemanager.user.User;
-import com.dhia.pfemanager.pfemanager.user.UserRole;
+import com.dhia.pfemanager.pfemanager.user.appUser.User;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import com.dhia.pfemanager.pfemanager.user.owner.SuperAdmin;
 import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,16 +19,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "enterprise")
 public class Enterprise extends User {
 
     private String field;
-    @OneToMany(mappedBy = "enterprise")
-    private List<Intern> internList;
-    @OneToMany(mappedBy = "enterprise")
-    private List<Supervisor> supervisorList;
+    private boolean isBlocked;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "superAdmin_id")
     private SuperAdmin applicationOwner;
 

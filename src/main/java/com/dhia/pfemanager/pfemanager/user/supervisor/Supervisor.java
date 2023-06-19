@@ -1,8 +1,7 @@
 package com.dhia.pfemanager.pfemanager.user.supervisor;
 
 import com.dhia.pfemanager.pfemanager.activity.Task;
-import com.dhia.pfemanager.pfemanager.user.User;
-import com.dhia.pfemanager.pfemanager.user.UserRole;
+import com.dhia.pfemanager.pfemanager.user.appUser.User;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import jakarta.persistence.*;
@@ -18,11 +17,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "supervisor")
 public class Supervisor extends User {
 
     private String type;
-
     @ManyToOne
     @JoinColumn(name = "enterprise_name")
     private Enterprise enterprise;
@@ -30,7 +27,5 @@ public class Supervisor extends User {
     @ManyToMany(mappedBy = "supervisors")
     private List<Intern> internList;
 
-    @OneToMany(mappedBy = "assigner")
-    private List<Task> assignedTasks;
 
 }
