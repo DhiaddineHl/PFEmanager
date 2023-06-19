@@ -6,11 +6,12 @@ import com.dhia.pfemanager.pfemanager.config.JwtService;
 import com.dhia.pfemanager.pfemanager.token.Token;
 import com.dhia.pfemanager.pfemanager.token.TokenRepository;
 import com.dhia.pfemanager.pfemanager.token.TokenType;
-import com.dhia.pfemanager.pfemanager.user.User;
-import com.dhia.pfemanager.pfemanager.user.UserRepository;
-import com.dhia.pfemanager.pfemanager.user.UserRole;
+import com.dhia.pfemanager.pfemanager.user.appUser.User;
+import com.dhia.pfemanager.pfemanager.user.appUser.UserRepository;
+import com.dhia.pfemanager.pfemanager.user.appUser.UserRole;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.enterprise.EnterpriseRepository;
+import com.dhia.pfemanager.pfemanager.user.exceptions.EmailTakenException;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import com.dhia.pfemanager.pfemanager.user.owner.SuperAdmin;
 import com.dhia.pfemanager.pfemanager.user.owner.SuperAdminRepository;
@@ -42,9 +43,7 @@ public class AuthenticationService {
 
 
     public AuthenticationResponse adminRegister(AdminRegisterRequest registerRequest) {
-//        if (superAdminRepository.loadAdmin().size() == 1){
-//            throw new IllegalStateException("The super admin user already exist");
-//        }
+
         var user = SuperAdmin.builder()
                 .name(registerRequest.getName())
                 .email(registerRequest.getEmail())
@@ -63,10 +62,10 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse enterpriseRegister(EnterpriseRegisterRequest registerRequest) {
+    public AuthenticationResponse enterpriseRegister(EnterpriseRegisterRequest registerRequest) throws EmailTakenException {
         Optional<User> userOptional = repository.findUserByEmail(registerRequest.getEmail());
         if (userOptional.isPresent()){
-            throw new IllegalStateException("Email is already taken");
+            throw new EmailTakenException("This email is already taken");
         }
         var enterprise = Enterprise.builder()
                 .name(registerRequest.getName())
@@ -75,6 +74,7 @@ public class AuthenticationService {
                 .phone(registerRequest.getPhone())
                 .role(UserRole.ENTERPRISE)
                 .field(registerRequest.getField())
+                .isBlocked(false)
                 .build();
         var savedEnterprise = repository.save(enterprise);
         var jwtToken = jwtService.generateToken(enterprise);
@@ -88,10 +88,10 @@ public class AuthenticationService {
     }
 
 
-    public AuthenticationResponse internRegister(InternRegisterRequest registerRequest) {
+    public AuthenticationResponse internRegister(InternRegisterRequest registerRequest) throws EmailTakenException {
         Optional<User> userOptional = repository.findUserByEmail(registerRequest.getEmail());
         if (userOptional.isPresent()){
-            throw new IllegalStateException("Email is already taken");
+            throw new EmailTakenException("This email is already taken");
         }
         var enterprise = enterpriseRepository.findEnterpriseByEmail(registerRequest.getEnterpriseEmail());
         var intern = Intern.builder()
@@ -114,10 +114,10 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse supervisorRegister(SupervisorRegisterRequest registerRequest) {
+    public AuthenticationResponse supervisorRegister(SupervisorRegisterRequest registerRequest) throws EmailTakenException {
         Optional<User> userOptional = repository.findUserByEmail(registerRequest.getEmail());
         if (userOptional.isPresent()){
-            throw new IllegalStateException("Email is already taken");
+            throw new EmailTakenException("This email is already taken");
         }
         var enterprise = enterpriseRepository.findEnterpriseByEmail(registerRequest.getEnterpriseEmail());
         var supervisor = Supervisor.builder()

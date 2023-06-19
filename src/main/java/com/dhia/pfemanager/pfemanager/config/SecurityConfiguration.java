@@ -1,7 +1,6 @@
 package com.dhia.pfemanager.pfemanager.config;
 
 
-import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,12 +10,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.dhia.pfemanager.pfemanager.user.Permission.*;
-import static com.dhia.pfemanager.pfemanager.user.UserRole.*;
+import static com.dhia.pfemanager.pfemanager.user.appUser.Permission.*;
+import static com.dhia.pfemanager.pfemanager.user.appUser.UserRole.*;
 
 
 @Configuration
@@ -32,7 +30,8 @@ public class SecurityConfiguration {
 
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
+                .authorizeHttpRequests(
+                        auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
 
                         .requestMatchers("/api/v1/demo/intern/**").hasAnyRole(ENTERPRISE.name(), INTERN.name())
@@ -41,10 +40,11 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/v1/demo/enterprise/**").hasRole(ENTERPRISE.name())
                         .requestMatchers(HttpMethod.GET,"/api/v1/demo/enterprise/**").hasAuthority(ENTERPRISE_READ.name())
 
-                        .requestMatchers("/api/v1/admin-dashboard/**").hasRole(SUPER_ADMIN.name())
-                        .requestMatchers(HttpMethod.GET,"/api/v1/admin-dashboard/**").hasAuthority(SUPER_ADMIN_READ.name())
+                        .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
+                        .requestMatchers(HttpMethod.GET,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
 
-                        .anyRequest().authenticated()
+                        .anyRequest()
+                                .authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

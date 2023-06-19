@@ -1,15 +1,14 @@
 package com.dhia.pfemanager.pfemanager.user.intern;
 
 import com.dhia.pfemanager.pfemanager.activity.Activity;
-import com.dhia.pfemanager.pfemanager.user.User;
-import com.dhia.pfemanager.pfemanager.user.UserRole;
+import com.dhia.pfemanager.pfemanager.user.appUser.User;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.List;
 
@@ -18,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "intern")
 public class Intern extends User {
 
 
@@ -26,7 +24,7 @@ public class Intern extends User {
     @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "supervisors",
             joinColumns = @JoinColumn(name = "supervisor_id"),

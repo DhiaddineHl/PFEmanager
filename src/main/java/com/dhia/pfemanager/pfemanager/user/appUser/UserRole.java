@@ -1,4 +1,4 @@
-package com.dhia.pfemanager.pfemanager.user;
+package com.dhia.pfemanager.pfemanager.user.appUser;
 
 
 import lombok.Getter;

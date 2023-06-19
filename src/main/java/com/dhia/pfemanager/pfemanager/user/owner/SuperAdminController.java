@@ -2,6 +2,7 @@ package com.dhia.pfemanager.pfemanager.user.owner;
 
 
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
+import com.dhia.pfemanager.pfemanager.user.enterprise.EnterpriseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,8 @@ import java.util.List;
 @RequestMapping(path = "api/v1/admin-dashboard")
 public class SuperAdminController {
 
-    private final SuperAdminService superAdminService;
 
-    @GetMapping("/enterprises")
-    public ResponseEntity<List<Enterprise>> getAllEnterprises () {
-        List<Enterprise> enterprises = superAdminService.getAllEnterprises();
-        return new ResponseEntity<>(enterprises, HttpStatus.OK);
+
     }
 
-}
+

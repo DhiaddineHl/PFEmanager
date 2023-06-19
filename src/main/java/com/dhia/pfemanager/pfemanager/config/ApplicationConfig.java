@@ -1,7 +1,7 @@
 package com.dhia.pfemanager.pfemanager.config;
 
 
-import com.dhia.pfemanager.pfemanager.user.UserRepository;
+import com.dhia.pfemanager.pfemanager.user.appUser.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

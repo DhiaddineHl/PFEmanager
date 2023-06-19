@@ -1,15 +1,13 @@
-package com.dhia.pfemanager.pfemanager.user;
+package com.dhia.pfemanager.pfemanager.user.appUser;
 
 
 import com.dhia.pfemanager.pfemanager.token.Token;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
