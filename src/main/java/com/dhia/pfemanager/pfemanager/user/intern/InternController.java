@@ -33,4 +33,10 @@ public class InternController {
         return ResponseEntity.ok(intern);
     }
 
+    @GetMapping("/byEnterprise/{enterpriseId}")
+    public ResponseEntity<List<InternDTO>> getInternsByEnterprise(@PathVariable("enterpriseId") Integer enterpriseId){
+        List<InternDTO> internsByEnterprise = internService.getInternsByEnterpriseId(enterpriseId);
+        return ResponseEntity.ok(internsByEnterprise);
+    }
+
 }

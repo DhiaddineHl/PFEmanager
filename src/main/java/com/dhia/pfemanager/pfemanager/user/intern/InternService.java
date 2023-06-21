@@ -30,4 +30,10 @@ public class InternService {
     }
 
 
+    public List<InternDTO> getInternsByEnterpriseId(Integer enterpriseId) {
+        return internRepository.findInternsByEnterpriseId(enterpriseId)
+                .stream()
+                .map(internDTOMapper)
+                .collect(Collectors.toList());
+    }
 }

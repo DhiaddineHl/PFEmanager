@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    password: Dddaaa000-008
+    password: pass
     url: jdbc:mysql://localhost:3306/pfemanager
     username: root
     driver-class-name: com.mysql.cj.jdbc.Driver
