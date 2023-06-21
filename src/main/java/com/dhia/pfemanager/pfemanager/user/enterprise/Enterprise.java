@@ -25,7 +25,12 @@ public class Enterprise extends User {
     private boolean isBlocked;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "superAdmin_id")
+    @JoinColumn(name = "super_admin_id")
     private SuperAdmin applicationOwner;
+
+    @Override
+    public boolean isEnabled() {
+        return !this.isBlocked;
+    }
 
 }

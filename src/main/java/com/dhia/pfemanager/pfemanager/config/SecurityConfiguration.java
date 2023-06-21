@@ -43,6 +43,9 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
                         .requestMatchers(HttpMethod.GET,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
 
+                                .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
+                        .requestMatchers(HttpMethod.PUT,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
+
                         .anyRequest()
                                 .authenticated()
                 )

@@ -3,10 +3,7 @@ package com.dhia.pfemanager.pfemanager.user.enterprise;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +25,16 @@ public class EnterpriseController {
     public ResponseEntity<Optional<EnterpriseDTO>> getEnterpriseById(@PathVariable("id") Integer id){
         Optional<EnterpriseDTO> enterprise = enterpriseService.getEnterpriseById(id);
         return ResponseEntity.ok(enterprise);
+    }
+
+    @PutMapping("/block")
+    public void blockEnterprise(@RequestBody BlockAndEnableRequest request) throws IllegalAccessException {
+       enterpriseService.blockEnterprise(request.getEnterpriseEmail());
+    }
+
+    @PutMapping("/enable")
+    public void enableEnterprise(@RequestBody BlockAndEnableRequest request) throws IllegalAccessException {
+        enterpriseService.enableEnterprise(request.getEnterpriseEmail());
     }
 
 
