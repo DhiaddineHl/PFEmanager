@@ -46,6 +46,16 @@ public class SecurityConfiguration {
                                 .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
                         .requestMatchers(HttpMethod.PUT,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
 
+                                .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
+                        .requestMatchers(HttpMethod.GET,"/api/v1/enterprises/**").hasAuthority(ENTERPRISE_READ.name())
+                                .requestMatchers("/api/v1/intern/**").hasRole(ENTERPRISE.name())
+                        .requestMatchers(HttpMethod.GET,"/api/v1/intern/**").hasAuthority(ENTERPRISE_READ.name())
+
+                                .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
+                        .requestMatchers(HttpMethod.PUT,"/api/v1/enterprises/**").hasAuthority(ENTERPRISE_CREATE.name())
+
+
+
                         .anyRequest()
                                 .authenticated()
                 )

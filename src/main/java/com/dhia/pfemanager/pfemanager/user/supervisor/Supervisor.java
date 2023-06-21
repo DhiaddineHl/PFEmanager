@@ -20,6 +20,7 @@ import java.util.List;
 public class Supervisor extends User {
 
     private String type;
+
     @ManyToOne
     @JoinColumn(name = "enterprise_name")
     private Enterprise enterprise;
