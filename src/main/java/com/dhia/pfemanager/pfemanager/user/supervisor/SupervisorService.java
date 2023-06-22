@@ -48,4 +48,15 @@ public class SupervisorService {
         internRepository.save(intern);
 
     }
+
+    public void assignSupervisorToInternById(Integer supervisorId, Integer internId) {
+        Supervisor supervisor = supervisorRepository.findSupervisorById(supervisorId);
+        Intern intern = internRepository.findInternById(internId);
+        //add intern to supervisor internList
+        supervisor.getInternList().add(intern);
+        supervisorRepository.save(supervisor);
+        //add supervisor to intern supervisorsList
+        intern.getSupervisors().add(supervisor);
+        internRepository.save(intern);
+    }
 }

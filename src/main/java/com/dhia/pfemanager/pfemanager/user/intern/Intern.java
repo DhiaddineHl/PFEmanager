@@ -24,7 +24,7 @@ public class Intern extends User {
     @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "supervisors",
             joinColumns = @JoinColumn(name = "supervisor_id"),

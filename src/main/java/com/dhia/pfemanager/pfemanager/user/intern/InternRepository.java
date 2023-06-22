@@ -15,4 +15,6 @@ public interface InternRepository extends JpaRepository<Intern, Integer> {
     List<Intern> findInternsByEnterpriseId(Integer enterpriseId);
 
     Intern findByEmail(String internEmail);
+
+    Intern findInternById(Integer id);
 }

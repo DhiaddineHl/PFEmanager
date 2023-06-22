@@ -39,10 +39,20 @@ public class SupervisorController {
     }
 
     @PutMapping("/assign")
-    public void assignSupervisorToIntern(@RequestBody AssignSupervisorToInternRequest request){
+    public void assignSupervisorToIntern(
+            @RequestBody AssignSupervisorToInternRequest request
+    ){
         supervisorService.assignSupervisorToIntern(
                 request.getSupervisorEmail(), request.getInternEmail()
         );
+    }
+
+    @PutMapping("/assign/{supervisorId}/to/{internId}")
+    public void assignSupervisorToInternById(
+            @PathVariable("supervisorId") Integer supervisorId,
+            @PathVariable("internId") Integer internId
+    ){
+        supervisorService.assignSupervisorToInternById(supervisorId, internId);
     }
 
 }
