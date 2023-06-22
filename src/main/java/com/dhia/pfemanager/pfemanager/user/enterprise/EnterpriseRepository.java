@@ -15,5 +15,7 @@ public interface EnterpriseRepository extends JpaRepository<Enterprise, Integer>
 """)
     Enterprise findEnterpriseByEmail(String email);
 
+    Enterprise findEnterpriseById(Integer id);
+
 
 }

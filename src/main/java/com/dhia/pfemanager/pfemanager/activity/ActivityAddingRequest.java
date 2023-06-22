@@ -10,5 +10,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ActivityCreationRequest {
+public class ActivityAddingRequest {
+
+    private String title;
+    private String description;
+    private String duration;
+
+
 }

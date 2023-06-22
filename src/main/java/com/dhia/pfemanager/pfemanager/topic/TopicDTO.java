@@ -1,0 +1,14 @@
+package com.dhia.pfemanager.pfemanager.topic;
+
+import com.dhia.pfemanager.pfemanager.activity.ActivityDTO;
+
+import java.util.List;
+
+public record TopicDTO(
+        Integer id,
+        String title,
+        String description,
+        String duration,
+        List<ActivityDTO> activities
+) {
+}
