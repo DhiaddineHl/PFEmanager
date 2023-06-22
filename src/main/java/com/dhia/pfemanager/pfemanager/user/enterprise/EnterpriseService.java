@@ -27,4 +27,27 @@ public class EnterpriseService {
                 .map(enterpriseDTOMapper);
     }
 
+
+    public void blockEnterprise(String enterpriseEmail) throws IllegalAccessException {
+        var enterprise = enterpriseRepository.findEnterpriseByEmail(enterpriseEmail);
+        if (enterprise.isBlocked()){
+           throw new IllegalAccessException("Enterprise is already blocked");
+        }
+        else{
+            enterprise.setBlocked(true);
+            enterpriseRepository.save(enterprise);
+        }
+    }
+
+    public void enableEnterprise(String enterpriseEmail) throws IllegalAccessException {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseByEmail(enterpriseEmail);
+        if (!enterprise.isBlocked()){
+            throw new IllegalAccessException("This enterprise is already enabled");
+        }
+        else{
+            enterprise.setBlocked(false);
+            enterpriseRepository.save(enterprise);
+        }
+
+    }
 }

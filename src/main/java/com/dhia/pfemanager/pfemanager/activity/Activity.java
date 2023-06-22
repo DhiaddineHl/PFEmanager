@@ -23,9 +23,11 @@ public class Activity {
     private Integer id;
     private String title;
     private String description;
+    private String fileURL;
 
     @OneToMany(mappedBy = "commentedActivity")
     private List<Comment> commentList;
+
     private Date deadline;
 
     @ManyToOne

@@ -4,11 +4,9 @@ package com.dhia.pfemanager.pfemanager.user.supervisor;
 import com.dhia.pfemanager.pfemanager.user.intern.InternDTO;
 import com.dhia.pfemanager.pfemanager.user.intern.InternService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/supervisor")
+@Slf4j
 public class SupervisorController {
 
     private final SupervisorService supervisorService;
@@ -37,6 +36,13 @@ public class SupervisorController {
     public ResponseEntity<List<SupervisorDTO>> getSupervisorsByEnterprise(@PathVariable("enterpriseId") Integer enterpriseId){
         List<SupervisorDTO> supervisorsByEnterprise = supervisorService.getSupervisorsByEnterpriseId(enterpriseId);
         return ResponseEntity.ok(supervisorsByEnterprise);
+    }
+
+    @PutMapping("/assign")
+    public void assignSupervisorToIntern(@RequestBody AssignSupervisorToInternRequest request){
+        supervisorService.assignSupervisorToIntern(
+                request.getSupervisorEmail(), request.getInternEmail()
+        );
     }
 
 }

@@ -13,4 +13,6 @@ public interface InternRepository extends JpaRepository<Intern, Integer> {
         where e.id = :enterpriseId
         """)
     List<Intern> findInternsByEnterpriseId(Integer enterpriseId);
+
+    Intern findByEmail(String internEmail);
 }

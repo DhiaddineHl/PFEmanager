@@ -14,4 +14,6 @@ public interface SupervisorRepository extends JpaRepository<Supervisor, Integer>
         where e.id = :enterpriseId
         """)
     List<Supervisor> findSupervisorsByEnterpriseId(Integer enterpriseId);
+
+    Supervisor findByEmail(String email);
 }
