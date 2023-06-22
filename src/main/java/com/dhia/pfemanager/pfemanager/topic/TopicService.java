@@ -6,6 +6,8 @@ import com.dhia.pfemanager.pfemanager.activity.ActivityAddingRequest;
 import com.dhia.pfemanager.pfemanager.activity.ActivityRepository;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.enterprise.EnterpriseRepository;
+import com.dhia.pfemanager.pfemanager.user.intern.Intern;
+import com.dhia.pfemanager.pfemanager.user.intern.InternRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ public class TopicService {
     private final ActivityRepository activityRepository;
     private final EnterpriseRepository enterpriseRepository;
     private final TopicDTOMapper topicDTOMapper;
+    private final InternRepository internRepository;
     public void createTopic(TopicCreationRequest request) {
         Enterprise enterprise = enterpriseRepository.findEnterpriseById(request.getEnterpriseId());
         var topic = Topic.builder()
@@ -50,5 +53,16 @@ public class TopicService {
                 .stream()
                 .map(topicDTOMapper)
                 .collect(Collectors.toList());
+    }
+
+    public void assignTopicToIntern(Integer internId, Integer topicId) {
+        Intern intern = internRepository.findInternById(internId);
+        Topic topic = topicRepository.findTopicById(topicId);
+
+        intern.setInternshipTopic(topic);
+        topic.setIntern(intern);
+
+        topicRepository.save(topic);
+
     }
 }

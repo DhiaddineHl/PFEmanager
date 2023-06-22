@@ -26,7 +26,6 @@ public class InternController {
         return ResponseEntity.ok(interns);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<Optional<InternDTO>> getInternById(@PathVariable("id") Integer id){
         Optional<InternDTO> intern = internService.getInternById(id);

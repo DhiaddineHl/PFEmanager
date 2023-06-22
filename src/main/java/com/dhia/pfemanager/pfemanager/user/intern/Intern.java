@@ -1,6 +1,7 @@
 package com.dhia.pfemanager.pfemanager.user.intern;
 
 import com.dhia.pfemanager.pfemanager.activity.Activity;
+import com.dhia.pfemanager.pfemanager.topic.Topic;
 import com.dhia.pfemanager.pfemanager.user.appUser.User;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
@@ -34,5 +35,8 @@ public class Intern extends User {
 
     @OneToMany(mappedBy = "intern")
     private List<Activity> internshipJournal;
+
+    @OneToOne(mappedBy = "intern")
+    private Topic internshipTopic;
 
 }
