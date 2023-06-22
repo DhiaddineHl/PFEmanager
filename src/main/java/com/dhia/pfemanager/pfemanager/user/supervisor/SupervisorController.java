@@ -4,6 +4,7 @@ package com.dhia.pfemanager.pfemanager.user.supervisor;
 import com.dhia.pfemanager.pfemanager.user.intern.InternDTO;
 import com.dhia.pfemanager.pfemanager.user.intern.InternService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/supervisor")
+@Slf4j
 public class SupervisorController {
 
     private final SupervisorService supervisorService;
