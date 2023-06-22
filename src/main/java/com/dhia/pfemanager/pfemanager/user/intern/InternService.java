@@ -36,4 +36,11 @@ public class InternService {
                 .map(internDTOMapper)
                 .collect(Collectors.toList());
     }
+
+    public List<InternDTO> getInternsBySupervisor(Integer supervisorId) {
+        return internRepository.findInternsBySupervisorId(supervisorId)
+                .stream()
+                .map(internDTOMapper)
+                .collect(Collectors.toList());
+    }
 }

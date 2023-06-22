@@ -39,4 +39,13 @@ public class InternController {
         return ResponseEntity.ok(internsByEnterprise);
     }
 
+    @GetMapping("/bySupervisor/{supervisorId}")
+    public ResponseEntity<List<InternDTO>>getInternsBySupervisor(
+            @PathVariable("supervisorId") Integer supervisorId
+    ){
+        return ResponseEntity.ok(internService.getInternsBySupervisor(
+                supervisorId
+        ));
+    }
+
 }

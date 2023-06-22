@@ -55,4 +55,6 @@ public class SupervisorController {
         supervisorService.assignSupervisorToInternById(supervisorId, internId);
     }
 
+
+
 }
