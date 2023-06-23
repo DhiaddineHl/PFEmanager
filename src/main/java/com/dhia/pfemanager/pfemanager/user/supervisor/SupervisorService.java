@@ -2,6 +2,7 @@ package com.dhia.pfemanager.pfemanager.user.supervisor;
 
 
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
+import com.dhia.pfemanager.pfemanager.user.intern.InternDTO;
 import com.dhia.pfemanager.pfemanager.user.intern.InternRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,4 +49,17 @@ public class SupervisorService {
         internRepository.save(intern);
 
     }
+
+    public void assignSupervisorToInternById(Integer supervisorId, Integer internId) {
+        Supervisor supervisor = supervisorRepository.findSupervisorById(supervisorId);
+        Intern intern = internRepository.findInternById(internId);
+        //add intern to supervisor internList
+        supervisor.getInternList().add(intern);
+        supervisorRepository.save(supervisor);
+        //add supervisor to intern supervisorsList
+        intern.getSupervisors().add(supervisor);
+        internRepository.save(intern);
+    }
+
+
 }

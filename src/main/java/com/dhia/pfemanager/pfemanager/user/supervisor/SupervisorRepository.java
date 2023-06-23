@@ -1,5 +1,6 @@
 package com.dhia.pfemanager.pfemanager.user.supervisor;
 
+import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,4 +17,8 @@ public interface SupervisorRepository extends JpaRepository<Supervisor, Integer>
     List<Supervisor> findSupervisorsByEnterpriseId(Integer enterpriseId);
 
     Supervisor findByEmail(String email);
+
+    Supervisor findSupervisorById(Integer id);
+
+
 }
