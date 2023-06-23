@@ -61,6 +61,7 @@ public class TopicService {
 
         intern.setInternshipTopic(topic);
         topic.setIntern(intern);
+        topic.setAvailable(false);
 
         topicRepository.save(topic);
 

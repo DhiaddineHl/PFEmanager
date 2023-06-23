@@ -29,6 +29,7 @@ public class Topic {
     private String description;
     private String duration;
     private String field;
+    private boolean isAvailable = true;
 
     @OneToMany(mappedBy = "topic")
     private List<Activity> activities;
