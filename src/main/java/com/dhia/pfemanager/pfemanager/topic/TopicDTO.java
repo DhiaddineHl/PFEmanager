@@ -9,6 +9,7 @@ public record TopicDTO(
         String title,
         String description,
         String duration,
+        boolean isAvailable,
         List<ActivityDTO> activities
 ) {
 }

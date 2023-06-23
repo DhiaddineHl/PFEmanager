@@ -37,4 +37,12 @@ public class TopicController {
         return ResponseEntity.ok(topicService.getTopicsByEnterprise(enterpriseId));
     }
 
+    @PutMapping("/assign/{topicId}/to/intern=/{internId}")
+    public void assignTopicToIntern(
+            @PathVariable("internId") Integer internId,
+            @PathVariable("topicId") Integer topicId
+    ){
+        topicService.assignTopicToIntern(internId,topicId);
+    }
+
 }

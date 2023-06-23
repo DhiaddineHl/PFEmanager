@@ -21,6 +21,7 @@ public class TopicDTOMapper implements Function<Topic, TopicDTO> {
                         topic.getTitle(),
                         topic.getDescription(),
                         topic.getDuration(),
+                        topic.isAvailable(),
                         topic.getActivities()
                                 .stream()
                                 .map(activityDTOMapper)
