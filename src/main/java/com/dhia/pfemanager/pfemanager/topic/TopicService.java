@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +24,8 @@ public class TopicService {
     private final EnterpriseRepository enterpriseRepository;
     private final TopicDTOMapper topicDTOMapper;
     private final InternRepository internRepository;
+
+
     public void createTopic(TopicCreationRequest request) {
         Enterprise enterprise = enterpriseRepository.findEnterpriseById(request.getEnterpriseId());
         var topic = Topic.builder()
@@ -64,6 +67,12 @@ public class TopicService {
         topic.setAvailable(false);
 
         topicRepository.save(topic);
+
+    }
+
+    public Optional<TopicDTO> getTopicsByIntern(Integer internId) {
+        return topicRepository.findTopicByInternId(internId)
+                .map(topicDTOMapper);
 
     }
 }

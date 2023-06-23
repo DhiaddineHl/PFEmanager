@@ -15,7 +15,8 @@ public class InternDTOMapper implements Function<Intern, InternDTO> {
                         intern.getName(),
                         intern.getEmail(),
                         intern.getPhone(),
-                        intern.getSpeciality()
+                        intern.getSpeciality(),
+                        intern.getInternshipTopic().getTitle()
                 )
 
                 ;

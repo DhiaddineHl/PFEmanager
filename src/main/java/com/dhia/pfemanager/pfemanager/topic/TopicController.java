@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,6 +38,13 @@ public class TopicController {
         return ResponseEntity.ok(topicService.getTopicsByEnterprise(enterpriseId));
     }
 
+    @GetMapping("/byIntern/{internId}")
+    public ResponseEntity<Optional<TopicDTO>>getTopicsByIntern(
+            @PathVariable("internId") Integer internId
+    ){
+        return ResponseEntity.ok(topicService.getTopicsByIntern(internId));
+    }
+
     @PutMapping("/assign/{topicId}/to/intern=/{internId}")
     public void assignTopicToIntern(
             @PathVariable("internId") Integer internId,
@@ -44,5 +52,6 @@ public class TopicController {
     ){
         topicService.assignTopicToIntern(internId,topicId);
     }
+
 
 }

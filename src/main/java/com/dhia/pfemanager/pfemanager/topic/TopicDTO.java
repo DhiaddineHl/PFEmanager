@@ -11,5 +11,6 @@ public record TopicDTO(
         String duration,
         boolean isAvailable,
         List<ActivityDTO> activities
+
 ) {
 }

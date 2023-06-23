@@ -15,4 +15,6 @@ public interface TopicRepository extends JpaRepository<Topic,Integer> {
 """)
     List<Topic> findTopicsByEnterpriseId(Integer enterpriseId);
 
+    Optional<Topic> findTopicByInternId(Integer internID);
+
 }
