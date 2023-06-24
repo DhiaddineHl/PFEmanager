@@ -1,6 +1,5 @@
 package com.dhia.pfemanager.pfemanager.user.supervisor;
 
-import com.dhia.pfemanager.pfemanager.activity.Task;
 import com.dhia.pfemanager.pfemanager.user.appUser.User;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
