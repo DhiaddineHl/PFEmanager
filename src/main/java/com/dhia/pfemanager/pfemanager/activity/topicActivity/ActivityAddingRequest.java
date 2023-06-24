@@ -1,4 +1,4 @@
-package com.dhia.pfemanager.pfemanager.activity;
+package com.dhia.pfemanager.pfemanager.activity.topicActivity;
 
 
 import lombok.AllArgsConstructor;

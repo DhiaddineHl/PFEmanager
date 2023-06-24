@@ -1,5 +1,7 @@
-package com.dhia.pfemanager.pfemanager.activity;
+package com.dhia.pfemanager.pfemanager.activity.topicActivity;
 
+import com.dhia.pfemanager.pfemanager.activity.topicActivity.Activity;
+import com.dhia.pfemanager.pfemanager.activity.topicActivity.ActivityDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;

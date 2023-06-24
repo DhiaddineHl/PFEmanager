@@ -1,9 +1,9 @@
 package com.dhia.pfemanager.pfemanager.topic;
 
 
-import com.dhia.pfemanager.pfemanager.activity.Activity;
-import com.dhia.pfemanager.pfemanager.activity.ActivityAddingRequest;
-import com.dhia.pfemanager.pfemanager.activity.ActivityRepository;
+import com.dhia.pfemanager.pfemanager.activity.topicActivity.Activity;
+import com.dhia.pfemanager.pfemanager.activity.topicActivity.ActivityAddingRequest;
+import com.dhia.pfemanager.pfemanager.activity.topicActivity.ActivityRepository;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.enterprise.EnterpriseRepository;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;

@@ -1,7 +1,7 @@
 package com.dhia.pfemanager.pfemanager.topic;
 
 
-import com.dhia.pfemanager.pfemanager.activity.ActivityAddingRequest;
+import com.dhia.pfemanager.pfemanager.activity.topicActivity.ActivityAddingRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
