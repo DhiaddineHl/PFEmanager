@@ -1,7 +1,7 @@
 package com.dhia.pfemanager.pfemanager.topic;
 
 
-import com.dhia.pfemanager.pfemanager.activity.Activity;
+import com.dhia.pfemanager.pfemanager.activity.topicActivity.Activity;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import jakarta.persistence.*;
@@ -9,10 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import java.util.List;
-import java.util.Set;
 
 @Builder
 @AllArgsConstructor

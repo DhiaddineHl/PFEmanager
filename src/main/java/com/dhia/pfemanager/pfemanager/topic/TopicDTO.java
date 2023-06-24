@@ -1,6 +1,6 @@
 package com.dhia.pfemanager.pfemanager.topic;
 
-import com.dhia.pfemanager.pfemanager.activity.ActivityDTO;
+import com.dhia.pfemanager.pfemanager.activity.topicActivity.ActivityDTO;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.dhia.pfemanager.pfemanager.topic;
 
-import com.dhia.pfemanager.pfemanager.activity.ActivityDTOMapper;
+import com.dhia.pfemanager.pfemanager.activity.topicActivity.ActivityDTOMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.dhia.pfemanager.pfemanager.activity;
 
 
-import com.dhia.pfemanager.pfemanager.user.intern.Intern;
+import com.dhia.pfemanager.pfemanager.activity.topicActivity.Activity;
 import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Entity
 @Table(name = "task")
-public class Task extends Activity{
+public class Task extends Activity {
 
     @ManyToOne
     @JoinColumn(name = "supervisor_id")

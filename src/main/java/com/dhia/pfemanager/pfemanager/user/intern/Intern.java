@@ -1,15 +1,14 @@
 package com.dhia.pfemanager.pfemanager.user.intern;
 
-import com.dhia.pfemanager.pfemanager.activity.Activity;
+import com.dhia.pfemanager.pfemanager.activity.todo.Todo;
+import com.dhia.pfemanager.pfemanager.activity.topicActivity.Activity;
 import com.dhia.pfemanager.pfemanager.topic.Topic;
 import com.dhia.pfemanager.pfemanager.user.appUser.User;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.context.annotation.Lazy;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class Intern extends User {
     private List<Supervisor> supervisors;
 
     @OneToMany(mappedBy = "intern")
-    private List<Activity> internshipJournal;
+    private List<Todo> internshipJournal;
 
     @OneToOne(mappedBy = "intern")
     private Topic internshipTopic;

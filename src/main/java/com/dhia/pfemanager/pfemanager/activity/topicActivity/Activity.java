@@ -1,4 +1,4 @@
-package com.dhia.pfemanager.pfemanager.activity;
+package com.dhia.pfemanager.pfemanager.activity.topicActivity;
 
 
 import com.dhia.pfemanager.pfemanager.comment.Comment;
@@ -26,16 +26,7 @@ public class Activity {
     private Integer id;
     private String title;
     private String description;
-    private String fileURL;
-    private Date deadline;
     private String duration;
-
-    @OneToMany(mappedBy = "commentedActivity")
-    private List<Comment> commentList;
-
-    @ManyToOne
-    @JoinColumn(name = "intern_id")
-    private Intern intern;
 
     @ManyToOne
     @JoinColumn(name = "topic_id")
