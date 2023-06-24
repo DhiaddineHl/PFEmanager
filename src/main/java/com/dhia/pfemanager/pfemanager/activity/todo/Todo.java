@@ -23,7 +23,7 @@ public class Todo extends Activity {
 
     private Date deadline;
 
-    @OneToMany(mappedBy = "commentedActivity")
+    @OneToMany(mappedBy = "commentedTodo")
     private List<Comment> commentList;
 
     @ManyToOne

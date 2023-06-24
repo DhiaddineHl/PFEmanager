@@ -12,18 +12,20 @@ import java.util.List;
 @RequestMapping("/api/v1/todos")
 public class TodoController {
 
-    @PostMapping("/create")
-    public void createTopic(TodoCreationRequest request){
+    private final TodoService todoService;
 
+    @PostMapping("/add")
+    public void createTopic(
+            @RequestBody TodoCreationRequest request
+    ){
+        todoService.addTodoToJournal(request);
     }
 
     @GetMapping("/byIntern/{internId}")
-    public List<TodoDTO> getTodosByIntern(
+    public ResponseEntity<List<TodoDTO>> getTodosByIntern(
             @PathVariable("internId") Integer internId
     ){
-        return null;
+        return ResponseEntity.ok(todoService.getTodosByIntern(internId));
     }
-
-
 
 }
