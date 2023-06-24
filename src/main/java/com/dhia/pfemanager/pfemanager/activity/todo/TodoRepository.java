@@ -8,4 +8,6 @@ public interface TodoRepository extends JpaRepository<Todo, Integer> {
 
     List<Todo> findTodosByInternId(Integer id);
 
+    Todo findTodoById(Integer todoId);
+
 }
