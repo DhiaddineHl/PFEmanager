@@ -34,26 +34,26 @@ public class SecurityConfiguration {
                         auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
 
-                        .requestMatchers("/api/v1/demo/intern/**").hasAnyRole(ENTERPRISE.name(), INTERN.name())
-                        .requestMatchers(HttpMethod.GET,"/api/v1/demo/intern/**").hasAnyAuthority(ENTERPRISE_READ.name(), INTERN_READ.name())
-
-                        .requestMatchers("/api/v1/demo/enterprise/**").hasRole(ENTERPRISE.name())
-                        .requestMatchers(HttpMethod.GET,"/api/v1/demo/enterprise/**").hasAuthority(ENTERPRISE_READ.name())
-
-                        .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
-                        .requestMatchers(HttpMethod.GET,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
-
-                                .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
-                        .requestMatchers(HttpMethod.PUT,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
-
-                                .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
-                        .requestMatchers(HttpMethod.GET,"/api/v1/enterprises/**").hasAuthority(ENTERPRISE_READ.name())
-                                .requestMatchers("/api/v1/intern/**").hasRole(ENTERPRISE.name())
-                        .requestMatchers(HttpMethod.GET,"/api/v1/intern/**").hasAuthority(ENTERPRISE_READ.name())
-
-                                .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
-                        .requestMatchers(HttpMethod.PUT,"/api/v1/enterprises/**").hasAuthority(ENTERPRISE_CREATE.name())
-
+//                        .requestMatchers("/api/v1/demo/intern/**").hasAnyRole(ENTERPRISE.name(), INTERN.name())
+//                        .requestMatchers(HttpMethod.GET,"/api/v1/demo/intern/**").hasAnyAuthority(ENTERPRISE_READ.name(), INTERN_READ.name())
+//
+//                        .requestMatchers("/api/v1/demo/enterprise/**").hasRole(ENTERPRISE.name())
+//                        .requestMatchers(HttpMethod.GET,"/api/v1/demo/enterprise/**").hasAuthority(ENTERPRISE_READ.name())
+//
+//                        .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
+//                        .requestMatchers(HttpMethod.GET,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
+//
+//                                .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
+//                        .requestMatchers(HttpMethod.PUT,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
+//
+//                                .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
+//                        .requestMatchers(HttpMethod.GET,"/api/v1/enterprises/**").hasAuthority(ENTERPRISE_READ.name())
+//                                .requestMatchers("/api/v1/intern/**").hasRole(ENTERPRISE.name())
+//                        .requestMatchers(HttpMethod.GET,"/api/v1/intern/**").hasAuthority(ENTERPRISE_READ.name())
+//
+//                                .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
+//                        .requestMatchers(HttpMethod.PUT,"/api/v1/enterprises/**").hasAuthority(ENTERPRISE_CREATE.name())
+//
 
 
                         .anyRequest()
@@ -61,7 +61,8 @@ public class SecurityConfiguration {
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .cors(cors -> cors.disable());
 //                .logout()
 //                .addLogoutHandler(null)
 //                .logoutSuccessHandler((
@@ -70,5 +71,7 @@ public class SecurityConfiguration {
 
         return http.build();
     }
+
+
 
 }
