@@ -11,9 +11,11 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/enterprises")
+@CrossOrigin(origins = "http://localhost:4200/enterpriseList")
 public class EnterpriseController {
 
     private final EnterpriseService enterpriseService;
+
 
     @GetMapping("/all")
     public ResponseEntity<List<EnterpriseDTO>> getAllEnterprises(){
