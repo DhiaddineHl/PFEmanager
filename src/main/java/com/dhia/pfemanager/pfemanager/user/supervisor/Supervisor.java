@@ -21,7 +21,7 @@ public class Supervisor extends User {
     private String type;
 
     @ManyToOne
-    @JoinColumn(name = "enterprise_name")
+    @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
 
     @ManyToMany(mappedBy = "supervisors")
