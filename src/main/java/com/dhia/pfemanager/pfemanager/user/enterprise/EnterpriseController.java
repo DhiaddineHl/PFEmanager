@@ -11,7 +11,6 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/enterprises")
-@CrossOrigin(origins = "http://localhost:4200/enterpriseList")
 public class EnterpriseController {
 
     private final EnterpriseService enterpriseService;
@@ -29,14 +28,18 @@ public class EnterpriseController {
         return ResponseEntity.ok(enterprise);
     }
 
-    @PutMapping("/block")
-    public void blockEnterprise(@RequestBody BlockAndEnableRequest request) throws IllegalAccessException {
-       enterpriseService.blockEnterprise(request.getEnterpriseEmail());
+    @PutMapping("/block/{enterpriseId}")
+    public void blockEnterprise
+            (@PathVariable("enterpriseId") Integer enterpriseId )
+            throws IllegalAccessException {
+       enterpriseService.blockEnterprise(enterpriseId);
     }
 
-    @PutMapping("/enable")
-    public void enableEnterprise(@RequestBody BlockAndEnableRequest request) throws IllegalAccessException {
-        enterpriseService.enableEnterprise(request.getEnterpriseEmail());
+    @PutMapping("/enable/{enterpriseId}")
+    public void enableEnterprise
+            (@PathVariable("enterpriseId")Integer enterpriseId)
+            throws IllegalAccessException {
+        enterpriseService.enableEnterprise(enterpriseId);
     }
 
 

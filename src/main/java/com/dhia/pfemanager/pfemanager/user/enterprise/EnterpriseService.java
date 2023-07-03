@@ -28,8 +28,8 @@ public class EnterpriseService {
     }
 
 
-    public void blockEnterprise(String enterpriseEmail) throws IllegalAccessException {
-        var enterprise = enterpriseRepository.findEnterpriseByEmail(enterpriseEmail);
+    public void blockEnterprise(Integer enterpriseId) throws IllegalAccessException {
+        var enterprise = enterpriseRepository.findEnterpriseById(enterpriseId);
         if (enterprise.isBlocked()){
            throw new IllegalAccessException("Enterprise is already blocked");
         }
@@ -39,8 +39,8 @@ public class EnterpriseService {
         }
     }
 
-    public void enableEnterprise(String enterpriseEmail) throws IllegalAccessException {
-        Enterprise enterprise = enterpriseRepository.findEnterpriseByEmail(enterpriseEmail);
+    public void enableEnterprise(Integer id) throws IllegalAccessException {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseById(id);
         if (!enterprise.isBlocked()){
             throw new IllegalAccessException("This enterprise is already enabled");
         }
