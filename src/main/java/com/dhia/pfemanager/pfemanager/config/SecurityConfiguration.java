@@ -75,11 +75,26 @@ public class SecurityConfiguration {
                                 .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
                                 .requestMatchers(HttpMethod.GET,"/api/v1/supervisor/**").hasAuthority(ENTERPRISE_READ.name())
                                 .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
-                                .requestMatchers(HttpMethod.PUT,"/api/v1/supervisor/**").hasAuthority(ENTERPRISE_READ.name())
+                                .requestMatchers(HttpMethod.PUT,"/api/v1/supervisor/**").hasAuthority(ENTERPRISE_CREATE.name())
 
                                 //supervisor authorities :
                                 //consult interns assigned to him , track their progress (see their todos),
                                 //and assign tasks to them , and comment their work
+
+                                //intern
+                                .requestMatchers("/api/v1/intern/bySupervisor/**").hasRole(SUPERVISOR.name())
+                                .requestMatchers(HttpMethod.GET,"/api/v1/intern/bySupervisor/**").hasAuthority(SUPERVISOR_READ.name())
+                                //todos
+                                .requestMatchers("/api/v1/todos/byIntern/**").hasRole(SUPERVISOR.name())
+                                .requestMatchers(HttpMethod.GET,"/api/v1/todos/byIntern/**").hasAuthority(SUPERVISOR_READ.name())
+                                //tasks
+                                .requestMatchers("/api/v1/tasks/**").hasRole(SUPERVISOR.name())
+                                .requestMatchers(HttpMethod.GET,"/api/v1/tasks/**").hasAuthority(SUPERVISOR_READ.name())
+                                .requestMatchers("/api/v1/tasks/**").hasRole(SUPERVISOR.name())
+                                .requestMatchers(HttpMethod.POST,"/api/v1/tasks/**").hasAuthority(SUPERVISOR_CREATE.name())
+                                //comment
+                                .requestMatchers("/api/v1/comments/**").hasRole(SUPERVISOR.name())
+                                .requestMatchers(HttpMethod.POST,"/api/v1/comments/**").hasAuthority(SUPERVISOR_CREATE.name())
 
 
 
