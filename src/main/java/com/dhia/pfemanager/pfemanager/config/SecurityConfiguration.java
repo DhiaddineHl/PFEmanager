@@ -4,6 +4,7 @@ package com.dhia.pfemanager.pfemanager.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,14 +43,27 @@ public class SecurityConfiguration {
                         auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
 
+                                //superAdmin authorities : consult enterprises list , block or enable enterprises;
+
+                                .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
+                                .requestMatchers(HttpMethod.GET,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
+                                .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
+                                .requestMatchers(HttpMethod.PUT,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
+
+                                //enterprise authorities : create topics , add activities to topics , consult the list of topics ,
+                                //consult the list of supervisors and interns , assign topics to interns and interns to supervisors,
+                                //check for the interns progress (todos and tasks they are working on and supervisors comments on them);
+
+
+
+
+
 //                        .requestMatchers("/api/v1/demo/intern/**").hasAnyRole(ENTERPRISE.name(), INTERN.name())
 //                        .requestMatchers(HttpMethod.GET,"/api/v1/demo/intern/**").hasAnyAuthority(ENTERPRISE_READ.name(), INTERN_READ.name())
 //
 //                        .requestMatchers("/api/v1/demo/enterprise/**").hasRole(ENTERPRISE.name())
 //                        .requestMatchers(HttpMethod.GET,"/api/v1/demo/enterprise/**").hasAuthority(ENTERPRISE_READ.name())
-//
-//                        .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
-//                        .requestMatchers(HttpMethod.GET,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
+
 //
 //                                .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
 //                        .requestMatchers(HttpMethod.PUT,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
