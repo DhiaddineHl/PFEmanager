@@ -12,6 +12,8 @@ import com.dhia.pfemanager.pfemanager.user.appUser.UserRole;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.enterprise.EnterpriseRepository;
 import com.dhia.pfemanager.pfemanager.user.exceptions.EmailTakenException;
+import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseBlockedException;
+import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseNotFoundException;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import com.dhia.pfemanager.pfemanager.user.owner.SuperAdmin;
 import com.dhia.pfemanager.pfemanager.user.owner.SuperAdminRepository;
@@ -90,12 +92,18 @@ public class AuthenticationService {
     }
 
 
-    public AuthenticationResponse internRegister(InternRegisterRequest registerRequest) throws EmailTakenException {
+    public AuthenticationResponse internRegister(InternRegisterRequest registerRequest) throws EmailTakenException, EnterpriseNotFoundException, EnterpriseBlockedException {
         Optional<User> userOptional = repository.findUserByEmail(registerRequest.getEmail());
         if (userOptional.isPresent()){
             throw new EmailTakenException("This email is already taken");
         }
+        if (!enterpriseRepository.existsEnterpriseByEmail(registerRequest.getEnterpriseEmail())){
+            throw new EnterpriseNotFoundException("Enterprise by this email doesn't exist");
+        }
         var enterprise = enterpriseRepository.findEnterpriseByEmail(registerRequest.getEnterpriseEmail());
+        if (enterprise.isBlocked()){
+            throw new EnterpriseBlockedException("The enterprise which email you are using is currently blocked");
+        }
         var intern = Intern.builder()
                 .name(registerRequest.getName())
                 .email(registerRequest.getEmail())
@@ -117,12 +125,18 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse supervisorRegister(SupervisorRegisterRequest registerRequest) throws EmailTakenException {
+    public AuthenticationResponse supervisorRegister(SupervisorRegisterRequest registerRequest) throws EmailTakenException, EnterpriseNotFoundException, EnterpriseBlockedException {
         Optional<User> userOptional = repository.findUserByEmail(registerRequest.getEmail());
         if (userOptional.isPresent()){
             throw new EmailTakenException("This email is already taken");
         }
+        if (!enterpriseRepository.existsEnterpriseByEmail(registerRequest.getEnterpriseEmail())){
+            throw new EnterpriseNotFoundException("Enterprise by this email doesn't exist");
+        }
         var enterprise = enterpriseRepository.findEnterpriseByEmail(registerRequest.getEnterpriseEmail());
+        if (enterprise.isBlocked()){
+            throw new EnterpriseBlockedException("The enterprise which email you are using is currently blocked");
+        }
         var supervisor = Supervisor.builder()
                 .name(registerRequest.getName())
                 .email(registerRequest.getEmail())

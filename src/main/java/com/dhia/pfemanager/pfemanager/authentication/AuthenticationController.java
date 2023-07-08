@@ -3,6 +3,8 @@ package com.dhia.pfemanager.pfemanager.authentication;
 
 import com.dhia.pfemanager.pfemanager.authentication.requests.*;
 import com.dhia.pfemanager.pfemanager.user.exceptions.EmailTakenException;
+import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseBlockedException;
+import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -37,14 +39,14 @@ public class AuthenticationController {
     @PostMapping("/register/intern")
     public ResponseEntity<AuthenticationResponse> interRegister(
             @RequestBody InternRegisterRequest registerRequest
-    ) throws EmailTakenException {
+    ) throws EmailTakenException, EnterpriseNotFoundException, EnterpriseBlockedException {
         return ResponseEntity.ok(authService.internRegister(registerRequest));
     };
 
     @PostMapping("/register/supervisor")
     public ResponseEntity<AuthenticationResponse> supervisorRegister(
             @RequestBody SupervisorRegisterRequest registerRequest
-    ) throws EmailTakenException {
+    ) throws EmailTakenException, EnterpriseBlockedException, EnterpriseNotFoundException {
         return ResponseEntity.ok(authService.supervisorRegister(registerRequest));
     };
 
