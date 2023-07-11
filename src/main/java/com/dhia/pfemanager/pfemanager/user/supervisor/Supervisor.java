@@ -1,6 +1,7 @@
 package com.dhia.pfemanager.pfemanager.user.supervisor;
 
 import com.dhia.pfemanager.pfemanager.user.appUser.User;
+import com.dhia.pfemanager.pfemanager.user.appUser.UserRole;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import jakarta.persistence.*;
@@ -26,6 +27,13 @@ public class Supervisor extends User {
 
     @ManyToMany(mappedBy = "supervisors")
     private List<Intern> internList;
+
+    public Supervisor(String name, String email, String password, UserRole userRole) {
+        this.setName(name);
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setRole(userRole);
+    }
 
 
 }
