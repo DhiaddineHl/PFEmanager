@@ -1,6 +1,8 @@
 package com.dhia.pfemanager.pfemanager.user.enterprise;
 
 
+import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseBlockedException;
+import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseEnabledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +30,10 @@ public class EnterpriseService {
     }
 
 
-    public void blockEnterprise(Integer enterpriseId) throws IllegalAccessException {
+    public void blockEnterprise(Integer enterpriseId) throws EnterpriseBlockedException {
         var enterprise = enterpriseRepository.findEnterpriseById(enterpriseId);
         if (enterprise.isBlocked()){
-           throw new IllegalAccessException("Enterprise is already blocked");
+           throw new EnterpriseBlockedException("This enterprise is already Blocked");
         }
         else{
             enterprise.setBlocked(true);
@@ -39,10 +41,10 @@ public class EnterpriseService {
         }
     }
 
-    public void enableEnterprise(Integer id) throws IllegalAccessException {
+    public void enableEnterprise(Integer id) throws EnterpriseEnabledException {
         Enterprise enterprise = enterpriseRepository.findEnterpriseById(id);
         if (!enterprise.isBlocked()){
-            throw new IllegalAccessException("This enterprise is already enabled");
+            throw new EnterpriseEnabledException("This enterprise is already enabled");
         }
         else{
             enterprise.setBlocked(false);

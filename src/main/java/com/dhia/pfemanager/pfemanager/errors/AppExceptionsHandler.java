@@ -1,10 +1,7 @@
 package com.dhia.pfemanager.pfemanager.errors;
 
 
-import com.dhia.pfemanager.pfemanager.user.exceptions.EmailTakenException;
-import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseBlockedException;
-import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseNotFoundException;
-import com.dhia.pfemanager.pfemanager.user.exceptions.IncorrectCredentialsException;
+import com.dhia.pfemanager.pfemanager.user.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -56,11 +53,26 @@ public class AppExceptionsHandler {
                     ) {
         ErrorResponse errorResponse = new ErrorResponse();
 
-        errorResponse.setStatusCode(HttpStatus.FORBIDDEN.value());
+        errorResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
         errorResponse.setErrorMessage(exception.getMessage());
         errorResponse.setTimestamps(new Date());
 
-        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.FORBIDDEN);
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EnterpriseEnabledException.class)
+    public ResponseEntity<ErrorResponse> handleEnterpriseEnabledException
+            (
+                    EnterpriseEnabledException exception,
+                    WebRequest request
+                    ) {
+        ErrorResponse errorResponse = new ErrorResponse();
+
+        errorResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        errorResponse.setErrorMessage(exception.getMessage());
+        errorResponse.setTimestamps(new Date());
+
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(BadCredentialsException.class)
