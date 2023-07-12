@@ -1,6 +1,7 @@
 package com.dhia.pfemanager.pfemanager.user.supervisor;
 
 
+import com.dhia.pfemanager.pfemanager.user.exceptions.AlreadyAssignedException;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import com.dhia.pfemanager.pfemanager.user.intern.InternDTO;
 import com.dhia.pfemanager.pfemanager.user.intern.InternRepository;
@@ -54,6 +55,9 @@ public class SupervisorService {
         Supervisor supervisor = supervisorRepository.findSupervisorById(supervisorId);
         Intern intern = internRepository.findInternById(internId);
         //add intern to supervisor internList
+        if (supervisor.getInternList().contains(intern)){
+            throw new AlreadyAssignedException("This intern is already assigned to this supervisor");
+        }
         supervisor.getInternList().add(intern);
         supervisorRepository.save(supervisor);
         //add supervisor to intern supervisorsList

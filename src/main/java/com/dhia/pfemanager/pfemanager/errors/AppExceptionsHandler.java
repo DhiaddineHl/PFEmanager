@@ -90,4 +90,20 @@ public class AppExceptionsHandler {
         return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
 
+
+    @ExceptionHandler(AlreadyAssignedException.class)
+    public ResponseEntity<ErrorResponse> handleAlreadyAssignedException
+            (
+                    AlreadyAssignedException exception,
+                    WebRequest request
+                    ) {
+        ErrorResponse errorResponse = new ErrorResponse();
+
+        errorResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        errorResponse.setErrorMessage(exception.getMessage());
+        errorResponse.setTimestamps(new Date());
+
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
 }
