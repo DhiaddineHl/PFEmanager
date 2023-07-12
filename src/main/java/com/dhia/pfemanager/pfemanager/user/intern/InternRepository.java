@@ -19,6 +19,9 @@ public interface InternRepository extends JpaRepository<Intern, Integer> {
 
     Intern findInternById(Integer id);
 
+    @Override
+    boolean existsById(Integer id);
+
     @Query("""
         select s.internList from Supervisor s where s.id =:supervisorId
 """)

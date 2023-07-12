@@ -106,4 +106,34 @@ public class AppExceptionsHandler {
         return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(TopicNotAvailableException.class)
+    public ResponseEntity<ErrorResponse> handleTopicNotAvailableException
+            (
+                    TopicNotAvailableException exception,
+                    WebRequest request
+                    ) {
+        ErrorResponse errorResponse = new ErrorResponse();
+
+        errorResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        errorResponse.setErrorMessage(exception.getMessage());
+        errorResponse.setTimestamps(new Date());
+
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InternNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleInternNotFoundException
+            (
+                    InternNotFoundException exception,
+                    WebRequest request
+                    ) {
+        ErrorResponse errorResponse = new ErrorResponse();
+
+        errorResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        errorResponse.setErrorMessage(exception.getMessage());
+        errorResponse.setTimestamps(new Date());
+
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
 }
