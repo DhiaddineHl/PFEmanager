@@ -14,6 +14,7 @@ import com.dhia.pfemanager.pfemanager.user.enterprise.EnterpriseRepository;
 import com.dhia.pfemanager.pfemanager.user.exceptions.EmailTakenException;
 import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseBlockedException;
 import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseNotFoundException;
+import com.dhia.pfemanager.pfemanager.user.exceptions.IncorrectCredentialsException;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import com.dhia.pfemanager.pfemanager.user.owner.SuperAdmin;
 import com.dhia.pfemanager.pfemanager.user.owner.SuperAdminRepository;
@@ -24,6 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -190,7 +192,7 @@ public class AuthenticationService {
                 )
         );
         var user = repository.findUserByEmail(authenticationRequest.getEmail())
-                .orElseThrow();
+                .orElseThrow(()-> new BadCredentialsException("Invalid email or password"));
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         var userRole = user.getRole().name().toLowerCase();

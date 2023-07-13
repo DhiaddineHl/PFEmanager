@@ -1,6 +1,8 @@
 package com.dhia.pfemanager.pfemanager.user.enterprise;
 
 
+import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseBlockedException;
+import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseEnabledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,14 +33,14 @@ public class EnterpriseController {
     @PutMapping("/block/{enterpriseId}")
     public void blockEnterprise
             (@PathVariable("enterpriseId") Integer enterpriseId )
-            throws IllegalAccessException {
+            throws EnterpriseBlockedException {
        enterpriseService.blockEnterprise(enterpriseId);
     }
 
     @PutMapping("/enable/{enterpriseId}")
     public void enableEnterprise
             (@PathVariable("enterpriseId")Integer enterpriseId)
-            throws IllegalAccessException {
+            throws EnterpriseEnabledException {
         enterpriseService.enableEnterprise(enterpriseId);
     }
 
