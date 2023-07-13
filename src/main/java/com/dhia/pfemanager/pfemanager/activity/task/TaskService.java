@@ -41,4 +41,8 @@ public class TaskService {
                 .map(taskDTOMapper)
                 .collect(Collectors.toList());
     }
+
+    public void deleteTaskById(Integer taskId) {
+        taskRepository.deleteById(taskId);
+    }
 }

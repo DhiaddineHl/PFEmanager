@@ -22,6 +22,13 @@ public class TaskController {
         taskService.assignTaskToIntern(internId, request);
     }
 
+    @DeleteMapping("/delete/{taskId}")
+    public void deleteTaskById(
+            @PathVariable("taskId") Integer taskId
+            ){
+        taskService.deleteTaskById(taskId);
+    }
+
     @GetMapping("/byIntern/{internId}")
     public ResponseEntity<List<TaskDTO>> getTasksByIntern(
             @PathVariable("internId") Integer internId

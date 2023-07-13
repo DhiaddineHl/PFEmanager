@@ -19,4 +19,11 @@ public class CommentController {
         commentService.addCommentToTodo(todoId, request);
     }
 
+    @DeleteMapping("/delete/{todoId}")
+    public void deleteComment(
+            @PathVariable("todoId") Integer todoId
+    ){
+        commentService.deleteCommentById(todoId);
+    }
+
 }

@@ -38,4 +38,8 @@ public class TodoService {
                 .map(todoDTOMapper)
                 .collect(Collectors.toList());
     }
+
+    public void deleteTodoById(Integer todoId) {
+        todoRepository.deleteById(todoId);
+    }
 }

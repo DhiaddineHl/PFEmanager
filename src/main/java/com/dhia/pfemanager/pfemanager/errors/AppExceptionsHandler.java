@@ -1,6 +1,7 @@
 package com.dhia.pfemanager.pfemanager.errors;
 
 
+import com.dhia.pfemanager.pfemanager.exceptions.*;
 import com.dhia.pfemanager.pfemanager.user.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

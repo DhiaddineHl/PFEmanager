@@ -28,4 +28,8 @@ public class CommentService {
 
 
     }
+
+    public void deleteCommentById(Integer todoId) {
+        commentRepository.deleteById(todoId);
+    }
 }

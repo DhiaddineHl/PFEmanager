@@ -1,8 +1,8 @@
 package com.dhia.pfemanager.pfemanager.user.enterprise;
 
 
-import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseBlockedException;
-import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseEnabledException;
+import com.dhia.pfemanager.pfemanager.exceptions.EnterpriseBlockedException;
+import com.dhia.pfemanager.pfemanager.exceptions.EnterpriseEnabledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +51,9 @@ public class EnterpriseService {
             enterpriseRepository.save(enterprise);
         }
 
+    }
+
+    public void deleteEnterpriseById(Integer enterpriseId) {
+        enterpriseRepository.deleteById(enterpriseId);
     }
 }

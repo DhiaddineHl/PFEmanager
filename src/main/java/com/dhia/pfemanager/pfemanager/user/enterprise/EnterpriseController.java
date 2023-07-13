@@ -1,8 +1,8 @@
 package com.dhia.pfemanager.pfemanager.user.enterprise;
 
 
-import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseBlockedException;
-import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseEnabledException;
+import com.dhia.pfemanager.pfemanager.exceptions.EnterpriseBlockedException;
+import com.dhia.pfemanager.pfemanager.exceptions.EnterpriseEnabledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +28,13 @@ public class EnterpriseController {
     public ResponseEntity<Optional<EnterpriseDTO>> getEnterpriseById(@PathVariable("id") Integer id){
         Optional<EnterpriseDTO> enterprise = enterpriseService.getEnterpriseById(id);
         return ResponseEntity.ok(enterprise);
+    }
+
+    @DeleteMapping("/delete/{enterpriseId}")
+    public void deleteEnterpriseById(
+            @PathVariable("enterpriseId") Integer enterpriseId
+    ){
+        enterpriseService.deleteEnterpriseById(enterpriseId);
     }
 
     @PutMapping("/block/{enterpriseId}")
