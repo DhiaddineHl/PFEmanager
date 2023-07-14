@@ -43,76 +43,78 @@ public class SecurityConfiguration {
                         auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
 
-                                //superAdmin authorities : consult enterprises list , block or enable enterprises;
-
-                                .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
-                                .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
-                                .requestMatchers(HttpMethod.PUT,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_CREATE.name())
-
-                                //enterprise authorities : create topics ,
-                                // add activities to topics , consult the list of topics ,
-                                //consult the list of supervisors and interns , assign topics to interns and interns to supervisors,
-                                //check for the interns progress (todos and tasks they are working on and supervisors comments on them);
-
-                                //topics
-                                .requestMatchers("/api/v1/topics/**").hasRole(ENTERPRISE.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/topics/**").hasAuthority(ENTERPRISE_READ.name())
-                                .requestMatchers("/api/v1/topics/**").hasRole(ENTERPRISE.name())
-                                .requestMatchers(HttpMethod.POST,"/api/v1/topics/**").hasAuthority(ENTERPRISE_READ.name())
-                                .requestMatchers("/api/v1/topics/**").hasRole(ENTERPRISE.name())
-                                .requestMatchers(HttpMethod.PUT,"/api/v1/topics/**").hasAuthority(ENTERPRISE_READ.name())
-                                //todos
-                                .requestMatchers("/api/v1/todos/byIntern/{internId}").hasRole(ENTERPRISE.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/todos/byIntern/{internId}").hasAuthority(ENTERPRISE_READ.name())
-                                //tasks
-                                .requestMatchers("/api/v1/tasks/byIntern/{internId}").hasRole(ENTERPRISE.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/tasks/byIntern/{internId}").hasAuthority(ENTERPRISE_READ.name())
-                                //interns
-                                .requestMatchers("/api/v1/intern/**").hasRole(ENTERPRISE.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/intern/**").hasAuthority(ENTERPRISE_READ.name())
-                                //supervisor
-                                .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/supervisor/**").hasAuthority(ENTERPRISE_READ.name())
-                                .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
-                                .requestMatchers(HttpMethod.PUT,"/api/v1/supervisor/**").hasAuthority(ENTERPRISE_CREATE.name())
-
-                                //supervisor authorities :
-                                //consult interns assigned to him , track their progress (see their todos),
-                                //and assign tasks to them , and comment their work
-
-                                //intern
-                                .requestMatchers("/api/v1/intern/bySupervisor/**").hasRole(SUPERVISOR.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/intern/bySupervisor/**").hasAuthority(SUPERVISOR_READ.name())
-                                //topic
-                                .requestMatchers("/api/v1/topics/byIntern/**").hasRole(SUPERVISOR.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/topics/byIntern/**").hasAuthority(SUPERVISOR_READ.name())
-                                //todos
-                                .requestMatchers("/api/v1/todos/byIntern/**").hasRole(SUPERVISOR.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/todos/byIntern/**").hasAuthority(SUPERVISOR_READ.name())
-                                //tasks
-                                .requestMatchers("/api/v1/tasks/**").hasRole(SUPERVISOR.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/tasks/**").hasAuthority(SUPERVISOR_READ.name())
-                                .requestMatchers("/api/v1/tasks/**").hasRole(SUPERVISOR.name())
-                                .requestMatchers(HttpMethod.POST,"/api/v1/tasks/**").hasAuthority(SUPERVISOR_CREATE.name())
-                                //comment
-                                .requestMatchers("/api/v1/comments/**").hasRole(SUPERVISOR.name())
-                                .requestMatchers(HttpMethod.POST,"/api/v1/comments/**").hasAuthority(SUPERVISOR_CREATE.name())
-
-                                //intern authorities :
-                                //consult the topic assigned to him (activities), add todos , consult tasks and comments
-
-                                //topic
-                                .requestMatchers("/api/v1/topics/byIntern/**").hasRole(INTERN.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/topics/byIntern/**").hasAuthority(INTERN_READ.name())
-
-                                //todos
-                                .requestMatchers("/api/v1/todos/**").hasRole(INTERN.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/todos/**").hasAuthority(INTERN_READ.name())
-
-                                //tasks
-                                .requestMatchers("/api/v1/tasks/byIntern/**").hasRole(INTERN.name())
-                                .requestMatchers(HttpMethod.GET,"/api/v1/tasks/byIntern/**").hasAuthority(INTERN_READ.name())
+//                                //superAdmin authorities : consult enterprises list , block or enable enterprises;
+//
+//                                .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_READ.name())
+//                                .requestMatchers("/api/v1/enterprises/**").hasRole(SUPER_ADMIN.name())
+//                                .requestMatchers(HttpMethod.PUT,"/api/v1/enterprises/**").hasAuthority(SUPER_ADMIN_CREATE.name())
+//
+//                                //enterprise authorities : create topics ,
+//                                // add activities to topics , consult the list of topics ,
+//                                //consult the list of supervisors and interns , assign topics to interns and interns to supervisors,
+//                                //check for the interns progress (todos and tasks they are working on and supervisors comments on them);
+//
+//                                //topics
+//                                .requestMatchers("/api/v1/topics/**").hasRole(ENTERPRISE.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/topics/**").hasAuthority(ENTERPRISE_READ.name())
+//                                .requestMatchers("/api/v1/topics/**").hasRole(ENTERPRISE.name())
+//                                .requestMatchers(HttpMethod.POST,"/api/v1/topics/**").hasAuthority(ENTERPRISE_READ.name())
+//                                .requestMatchers("/api/v1/topics/**").hasRole(ENTERPRISE.name())
+//                                .requestMatchers(HttpMethod.PUT,"/api/v1/topics/**").hasAuthority(ENTERPRISE_READ.name())
+//                                //todos
+//                                .requestMatchers("/api/v1/todos/byIntern/{internId}").hasRole(ENTERPRISE.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/todos/byIntern/{internId}").hasAuthority(ENTERPRISE_READ.name())
+//                                //tasks
+//                                .requestMatchers("/api/v1/tasks/byIntern/{internId}").hasRole(ENTERPRISE.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/tasks/byIntern/{internId}").hasAuthority(ENTERPRISE_READ.name())
+//                                //interns
+//                                .requestMatchers("/api/v1/intern/**").hasRole(ENTERPRISE.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/intern/**").hasAuthority(ENTERPRISE_READ.name())
+//                                //supervisor
+//                                .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/supervisor/**").hasAuthority(ENTERPRISE_READ.name())
+//                                .requestMatchers("/api/v1/supervisor/**").hasRole(ENTERPRISE.name())
+//                                .requestMatchers(HttpMethod.PUT,"/api/v1/supervisor/**").hasAuthority(ENTERPRISE_CREATE.name())
+//
+//                                //supervisor authorities :
+//                                //consult interns assigned to him , track their progress (see their todos),
+//                                //and assign tasks to them , and comment their work
+//
+//                                //intern
+//                                .requestMatchers("/api/v1/intern/bySupervisor/**").hasRole(SUPERVISOR.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/intern/bySupervisor/**").hasAuthority(SUPERVISOR_READ.name())
+//                                //topic
+//                                .requestMatchers("/api/v1/topics/byIntern/**").hasRole(SUPERVISOR.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/topics/byIntern/**").hasAuthority(SUPERVISOR_READ.name())
+//                                //todos
+//                                .requestMatchers("/api/v1/todos/byIntern/**").hasRole(SUPERVISOR.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/todos/byIntern/**").hasAuthority(SUPERVISOR_READ.name())
+//                                //tasks
+//                                .requestMatchers("/api/v1/tasks/**").hasRole(SUPERVISOR.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/tasks/**").hasAuthority(SUPERVISOR_READ.name())
+//                                .requestMatchers("/api/v1/tasks/**").hasRole(SUPERVISOR.name())
+//                                .requestMatchers(HttpMethod.POST,"/api/v1/tasks/**").hasAuthority(SUPERVISOR_CREATE.name())
+//                                //comment
+//                                .requestMatchers("/api/v1/comments/**").hasRole(SUPERVISOR.name())
+//                                .requestMatchers(HttpMethod.POST,"/api/v1/comments/**").hasAuthority(SUPERVISOR_CREATE.name())
+//
+//                                //intern authorities :
+//                                //consult the topic assigned to him (activities), add todos , consult tasks and comments
+//
+//                                //topic
+//                                .requestMatchers("/api/v1/topics/byIntern/**").hasRole(INTERN.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/topics/byIntern/**").hasAuthority(INTERN_READ.name())
+//
+//                                //todos
+//                                .requestMatchers("/api/v1/todos/**").hasRole(INTERN.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/todos/**").hasAuthority(INTERN_READ.name())
+//                                .requestMatchers("/api/v1/todos/delete/**").hasRole(INTERN.name())
+//                                .requestMatchers(HttpMethod.DELETE,"/api/v1/todos/delete/**").hasAuthority(INTERN_DELETE.name())
+//
+//                                //tasks
+//                                .requestMatchers("/api/v1/tasks/byIntern/**").hasRole(INTERN.name())
+//                                .requestMatchers(HttpMethod.GET,"/api/v1/tasks/byIntern/**").hasAuthority(INTERN_READ.name())
 
 
                         .anyRequest()

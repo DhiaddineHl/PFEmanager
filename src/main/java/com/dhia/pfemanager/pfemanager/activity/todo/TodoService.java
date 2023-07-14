@@ -1,6 +1,8 @@
 package com.dhia.pfemanager.pfemanager.activity.todo;
 
 
+import com.dhia.pfemanager.pfemanager.comment.Comment;
+import com.dhia.pfemanager.pfemanager.comment.CommentService;
 import com.dhia.pfemanager.pfemanager.exceptions.EntityNotFoundException;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import com.dhia.pfemanager.pfemanager.user.intern.InternRepository;
@@ -17,6 +19,7 @@ public class TodoService {
     private final InternRepository internRepository;
     private final TodoRepository todoRepository;
     private final TodoDTOMapper todoDTOMapper;
+    private final CommentService commentService;
 
 
     public void addTodoToJournal(TodoCreationRequest request) {
@@ -43,6 +46,11 @@ public class TodoService {
     public void deleteTodoById(Integer todoId) {
         if (!todoRepository.existsById(todoId)){
             throw new EntityNotFoundException("This todo doesn't exist");
+        }
+        var todo = todoRepository.findTodoById(todoId);
+        var commentsList = todo.getCommentList();
+        for (Comment comment : commentsList){
+            commentService.deleteCommentById(comment.getId());
         }
         todoRepository.deleteById(todoId);
     }
