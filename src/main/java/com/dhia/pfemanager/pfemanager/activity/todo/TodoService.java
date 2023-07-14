@@ -1,6 +1,7 @@
 package com.dhia.pfemanager.pfemanager.activity.todo;
 
 
+import com.dhia.pfemanager.pfemanager.exceptions.EntityNotFoundException;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import com.dhia.pfemanager.pfemanager.user.intern.InternRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,9 @@ public class TodoService {
     }
 
     public void deleteTodoById(Integer todoId) {
+        if (!todoRepository.existsById(todoId)){
+            throw new EntityNotFoundException("This todo doesn't exist");
+        }
         todoRepository.deleteById(todoId);
     }
 }

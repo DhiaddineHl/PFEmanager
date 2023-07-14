@@ -7,7 +7,7 @@ import com.dhia.pfemanager.pfemanager.activity.topicActivity.ActivityRepository;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.enterprise.EnterpriseRepository;
 import com.dhia.pfemanager.pfemanager.exceptions.AlreadyAssignedException;
-import com.dhia.pfemanager.pfemanager.exceptions.InternNotFoundException;
+import com.dhia.pfemanager.pfemanager.exceptions.EntityNotFoundException;
 import com.dhia.pfemanager.pfemanager.exceptions.TopicNotAvailableException;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import com.dhia.pfemanager.pfemanager.user.intern.InternRepository;
@@ -63,7 +63,7 @@ public class TopicService {
 
     public void assignTopicToIntern(Integer internId, Integer topicId) {
         if (!internRepository.existsById(internId)){
-            throw new InternNotFoundException("This intern does not exist");
+            throw new EntityNotFoundException("This intern does not exist");
         }
         Intern intern = internRepository.findInternById(internId);
         Topic topic = topicRepository.findTopicById(topicId);
@@ -90,6 +90,9 @@ public class TopicService {
     }
 
     public void deleteTopicById(Integer id) {
+        if (!topicRepository.existsById(id)){
+            throw new EntityNotFoundException("This topic doesn't exist");
+        }
         topicRepository.deleteById(id);
     }
 }
