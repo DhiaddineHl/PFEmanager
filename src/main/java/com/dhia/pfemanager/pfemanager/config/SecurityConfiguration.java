@@ -109,6 +109,8 @@ public class SecurityConfiguration {
                                 //todos
                                 .requestMatchers("/api/v1/todos/**").hasRole(INTERN.name())
                                 .requestMatchers(HttpMethod.GET,"/api/v1/todos/**").hasAuthority(INTERN_READ.name())
+                                .requestMatchers("/api/v1/todos/delete/**").hasRole(INTERN.name())
+                                .requestMatchers(HttpMethod.DELETE,"/api/v1/todos/delete/**").hasAuthority(INTERN_DELETE.name())
 
                                 //tasks
                                 .requestMatchers("/api/v1/tasks/byIntern/**").hasRole(INTERN.name())

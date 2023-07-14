@@ -1,6 +1,7 @@
 package com.dhia.pfemanager.pfemanager.activity.task;
 
 
+import com.dhia.pfemanager.pfemanager.exceptions.EntityNotFoundException;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import com.dhia.pfemanager.pfemanager.user.intern.InternRepository;
 import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
@@ -40,5 +41,12 @@ public class TaskService {
                 .stream()
                 .map(taskDTOMapper)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteTaskById(Integer taskId) {
+        if (!taskRepository.existsById(taskId)){
+            throw new EntityNotFoundException("This task doesn't exist");
+        }
+        taskRepository.deleteById(taskId);
     }
 }

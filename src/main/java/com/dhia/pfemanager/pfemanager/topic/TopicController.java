@@ -23,6 +23,13 @@ public class TopicController {
         topicService.createTopic(request);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteTopic(
+            @PathVariable("id") Integer id
+    ){
+        topicService.deleteTopicById(id);
+    }
+
     @PostMapping("/addActivity/{topicId}")
     public void addActivityToTopic(
             @PathVariable("topicId") Integer topicId,

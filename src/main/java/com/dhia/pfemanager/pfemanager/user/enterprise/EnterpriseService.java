@@ -1,8 +1,9 @@
 package com.dhia.pfemanager.pfemanager.user.enterprise;
 
 
-import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseBlockedException;
-import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseEnabledException;
+import com.dhia.pfemanager.pfemanager.exceptions.EnterpriseBlockedException;
+import com.dhia.pfemanager.pfemanager.exceptions.EnterpriseEnabledException;
+import com.dhia.pfemanager.pfemanager.exceptions.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,12 @@ public class EnterpriseService {
             enterpriseRepository.save(enterprise);
         }
 
+    }
+
+    public void deleteEnterpriseById(Integer enterpriseId) {
+        if (!enterpriseRepository.existsById(enterpriseId)){
+            throw new EntityNotFoundException("This enterprise doesn't exist");
+        }
+        enterpriseRepository.deleteById(enterpriseId);
     }
 }

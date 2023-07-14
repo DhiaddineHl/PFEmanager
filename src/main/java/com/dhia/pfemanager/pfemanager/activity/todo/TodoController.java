@@ -15,10 +15,17 @@ public class TodoController {
     private final TodoService todoService;
 
     @PostMapping("/add")
-    public void createTopic(
+    public void addTodoToJournal(
             @RequestBody TodoCreationRequest request
     ){
         todoService.addTodoToJournal(request);
+    }
+
+    @DeleteMapping("/delete/{todoId}")
+    public void deleteTodo(
+            @PathVariable("todoId") Integer todoId
+    ){
+        todoService.deleteTodoById(todoId);
     }
 
     @GetMapping("/byIntern/{internId}")

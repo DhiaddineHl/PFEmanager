@@ -3,6 +3,7 @@ package com.dhia.pfemanager.pfemanager.comment;
 
 import com.dhia.pfemanager.pfemanager.activity.todo.Todo;
 import com.dhia.pfemanager.pfemanager.activity.todo.TodoRepository;
+import com.dhia.pfemanager.pfemanager.exceptions.EntityNotFoundException;
 import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
 import com.dhia.pfemanager.pfemanager.user.supervisor.SupervisorRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,12 @@ public class CommentService {
                 .build();
         commentRepository.save(comment);
         todo.getCommentList().add(comment);
+    }
 
-
+    public void deleteCommentById(Integer todoId) {
+        if (!commentRepository.existsById(todoId)){
+            throw new EntityNotFoundException("This comment doesn't exist");
+        }
+        commentRepository.deleteById(todoId);
     }
 }

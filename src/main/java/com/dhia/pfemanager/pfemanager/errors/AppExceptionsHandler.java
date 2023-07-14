@@ -1,7 +1,7 @@
 package com.dhia.pfemanager.pfemanager.errors;
 
 
-import com.dhia.pfemanager.pfemanager.user.exceptions.*;
+import com.dhia.pfemanager.pfemanager.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -121,19 +121,19 @@ public class AppExceptionsHandler {
         return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(InternNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleInternNotFoundException
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleEntityNotFoundException
             (
-                    InternNotFoundException exception,
+                    EntityNotFoundException exception,
                     WebRequest request
                     ) {
         ErrorResponse errorResponse = new ErrorResponse();
 
-        errorResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        errorResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
         errorResponse.setErrorMessage(exception.getMessage());
         errorResponse.setTimestamps(new Date());
 
-        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
 }

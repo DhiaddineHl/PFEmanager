@@ -2,9 +2,9 @@ package com.dhia.pfemanager.pfemanager.authentication;
 
 
 import com.dhia.pfemanager.pfemanager.authentication.requests.*;
-import com.dhia.pfemanager.pfemanager.user.exceptions.EmailTakenException;
-import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseBlockedException;
-import com.dhia.pfemanager.pfemanager.user.exceptions.EnterpriseNotFoundException;
+import com.dhia.pfemanager.pfemanager.exceptions.EmailTakenException;
+import com.dhia.pfemanager.pfemanager.exceptions.EnterpriseBlockedException;
+import com.dhia.pfemanager.pfemanager.exceptions.EnterpriseNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

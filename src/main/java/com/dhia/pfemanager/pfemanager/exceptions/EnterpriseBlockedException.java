@@ -1,4 +1,4 @@
-package com.dhia.pfemanager.pfemanager.user.exceptions;
+package com.dhia.pfemanager.pfemanager.exceptions;
 
 public class EnterpriseBlockedException extends Exception{
     public EnterpriseBlockedException(String message) {
