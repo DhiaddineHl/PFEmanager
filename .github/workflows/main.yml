@@ -1,0 +1,23 @@
+name : PFEmanager App CI/CD workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-deploy :
+    name: Build and deploy PFEmanager application
+    runs-on: ubuntu-latest
+    steps:
+      - name : checkout code
+        uses: actions/checkout@v3
+
+      - name : setup java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution : 'microsoft'
+          java-version : 17
+
+      - name : build the application
+        run : maven -B package --file pom.xml
