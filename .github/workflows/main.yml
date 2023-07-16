@@ -20,4 +20,4 @@ jobs:
           java-version : 17
 
       - name : build the application
-        run : maven -B package --file pom.xml
+        run : mvn -B package --file pom.xml
