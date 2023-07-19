@@ -2,6 +2,8 @@ package com.dhia.pfemanager.pfemanager.authentication;
 
 
 import com.dhia.pfemanager.pfemanager.authentication.requests.*;
+import com.dhia.pfemanager.pfemanager.confirmationwithemail.PasswordResetRequest;
+import com.dhia.pfemanager.pfemanager.confirmationwithemail.PasswordResetService;
 import com.dhia.pfemanager.pfemanager.exceptions.EmailTakenException;
 import com.dhia.pfemanager.pfemanager.exceptions.EnterpriseBlockedException;
 import com.dhia.pfemanager.pfemanager.exceptions.EnterpriseNotFoundException;
@@ -22,6 +24,7 @@ import java.io.IOException;
 public class AuthenticationController {
 
     private final AuthenticationService authService;
+    private final PasswordResetService passwordResetService;
 
     @PostMapping("/register/super_admin")
     public ResponseEntity<AuthenticationResponse> adminRegister(
@@ -56,6 +59,14 @@ public class AuthenticationController {
     ){
         return ResponseEntity.ok(authService.authenticate(authenticationRequest));
     };
+
+    @PostMapping("/resetPassword")
+    public void resetPassword(
+            @RequestBody PasswordResetRequest passwordResetRequest
+            ){
+        passwordResetService.resetPassword(passwordResetRequest.getUserEmail());
+    }
+
 
     @PostMapping("/refresh-token")
     public void refreshToken(
