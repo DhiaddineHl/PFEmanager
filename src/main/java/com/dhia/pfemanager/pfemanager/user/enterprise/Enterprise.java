@@ -30,7 +30,7 @@ public class Enterprise extends User {
 
     @Override
     public boolean isEnabled() {
-        return !this.isBlocked;
+        return !this.isBlocked && this.isAccountVerified();
     }
 
 }

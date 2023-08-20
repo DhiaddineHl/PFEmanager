@@ -6,6 +6,7 @@ import com.dhia.pfemanager.pfemanager.config.JwtService;
 import com.dhia.pfemanager.pfemanager.token.Token;
 import com.dhia.pfemanager.pfemanager.token.TokenRepository;
 import com.dhia.pfemanager.pfemanager.token.TokenType;
+import com.dhia.pfemanager.pfemanager.token.VerificationTokenService;
 import com.dhia.pfemanager.pfemanager.user.appUser.User;
 import com.dhia.pfemanager.pfemanager.user.appUser.UserRepository;
 import com.dhia.pfemanager.pfemanager.user.appUser.UserRole;
@@ -43,6 +44,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final VerificationTokenService verificationTokenService;
 
 
     public AuthenticationResponse adminRegister(AdminRegisterRequest registerRequest) {
@@ -158,6 +160,11 @@ public class AuthenticationService {
                 .refreshToken(refreshToken)
                 .userType("supervisor")
                 .build();
+    }
+
+
+    public void sendAccountVerificationEmail(User user){
+        verificationTokenService.createVerificationToken(user);
     }
 
     private void revokeAllTokens(User user){

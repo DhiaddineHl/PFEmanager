@@ -29,6 +29,7 @@ public class User implements UserDetails {
     private String password;
     private String phone;
     private String speciality;
+    private boolean isAccountVerified;
 
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
@@ -73,6 +74,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.isAccountVerified;
     }
 }
