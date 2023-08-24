@@ -44,8 +44,8 @@ public class SupervisorService {
         //add intern to supervisor internList
         supervisor.getInternList().add(intern);
         supervisorRepository.save(supervisor);
-        //add supervisor to intern supervisorList
-        intern.getSupervisors().add(supervisor);
+        //set thr intern Supervisor
+        intern.setSupervisor(supervisor);
         internRepository.save(intern);
 
     }
@@ -60,7 +60,7 @@ public class SupervisorService {
         supervisor.getInternList().add(intern);
         supervisorRepository.save(supervisor);
         //add supervisor to intern supervisorsList
-        intern.getSupervisors().add(supervisor);
+        intern.setSupervisor(supervisor);
         internRepository.save(intern);
     }
 

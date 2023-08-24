@@ -25,7 +25,7 @@ public class Supervisor extends User {
     @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
 
-    @ManyToMany(mappedBy = "supervisors")
+    @OneToMany(mappedBy = "supervisor")
     private List<Intern> internList;
 
     public Supervisor(String name, String email, String password, UserRole userRole) {

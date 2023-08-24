@@ -24,13 +24,13 @@ public class Intern extends User {
     @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
 
-    @ManyToMany
+    @ManyToOne
     @JoinTable(
             name = "supervisors",
-            joinColumns = @JoinColumn(name = "supervisor_id"),
-            inverseJoinColumns = @JoinColumn(name = "intern_id")
+            joinColumns = @JoinColumn(name = "intern_id"),
+            inverseJoinColumns = @JoinColumn(name = "supervisor_id")
     )
-    private List<Supervisor> supervisors;
+    private Supervisor supervisor;
 
     @OneToMany(mappedBy = "intern")
     private List<Todo> internshipJournal;

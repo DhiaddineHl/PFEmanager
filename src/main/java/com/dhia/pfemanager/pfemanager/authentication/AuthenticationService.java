@@ -157,6 +157,7 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .userType("supervisor")
+                .userId(supervisor.getId())
                 .build();
     }
 
@@ -201,6 +202,7 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .userType(userRole)
+                .userId(user.getId())
                 .build();
     }
 
