@@ -37,6 +37,7 @@ public class TopicService {
                 .duration(request.getDuration())
                 .field(request.getField())
                 .enterprise(enterprise)
+                .isAvailable(true)
                 .build();
         topicRepository.save(topic);
 
@@ -66,18 +67,30 @@ public class TopicService {
             throw new EntityNotFoundException("This intern does not exist");
         }
         Intern intern = internRepository.findInternById(internId);
+        var supervisor = intern.getSupervisor();
         Topic topic = topicRepository.findTopicById(topicId);
-        if (topic.getIntern().equals(intern)){
-            throw new AlreadyAssignedException("This topic already assigned to this intern");
-        }
+//check for topic availability
         if (!topic.isAvailable()){
             throw new TopicNotAvailableException("This topic is not available");
         }
+
+        if (topic.getIntern() != null) {
+
+            //check if the topic is already assigned to that intern
+            if (topic.getIntern().equals(intern)){
+                throw new AlreadyAssignedException("This topic already assigned to this intern");
+            }
+
+        }
+
+
 
 
         intern.setInternshipTopic(topic);
         topic.setIntern(intern);
         topic.setAvailable(false);
+        topic.setSupervisor(intern.getSupervisor());
+        supervisor.getTopicList().add(topic);
 
         topicRepository.save(topic);
 

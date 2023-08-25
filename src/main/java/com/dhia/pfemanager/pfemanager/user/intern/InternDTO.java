@@ -10,6 +10,6 @@ public record InternDTO(
         String phone,
         String speciality,
         String topicTitle,
-        String supervisor
+        String supervisorName
 ) {
 }
