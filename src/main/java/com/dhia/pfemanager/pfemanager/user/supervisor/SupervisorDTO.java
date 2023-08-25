@@ -6,5 +6,6 @@ public record SupervisorDTO(
         String email,
         String phone,
         String speciality
+
 ) {
 }

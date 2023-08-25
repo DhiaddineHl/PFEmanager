@@ -4,6 +4,7 @@ package com.dhia.pfemanager.pfemanager.topic;
 import com.dhia.pfemanager.pfemanager.activity.topicActivity.Activity;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
+import com.dhia.pfemanager.pfemanager.user.supervisor.Supervisor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,5 +40,9 @@ public class Topic {
     @OneToOne
     @JoinColumn(name = "intern_id")
     private Intern intern;
+
+    @ManyToOne
+    @JoinColumn(name = "supervisor")
+    private Supervisor supervisor;
 
 }
