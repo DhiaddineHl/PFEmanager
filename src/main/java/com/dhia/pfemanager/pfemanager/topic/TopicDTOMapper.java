@@ -22,7 +22,9 @@ public class TopicDTOMapper implements Function<Topic, TopicDTO> {
                         topic.getDescription(),
                         topic.getDuration(),
                         topic.isAvailable(),
-                        topic.getActivities()
+                        topic.getIntern() == null ? "No intern assigned to yet" : topic.getIntern().getName(),
+                        topic.getSupervisor() == null ? "No supervisor assigned to yet" : topic.getSupervisor().getName(),
+                         topic.getActivities()
                                 .stream()
                                 .map(activityDTOMapper)
                                 .collect(Collectors.toList())
