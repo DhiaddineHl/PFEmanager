@@ -1,5 +1,6 @@
 package com.dhia.pfemanager.pfemanager.user.supervisor;
 
+import com.dhia.pfemanager.pfemanager.topic.Topic;
 import com.dhia.pfemanager.pfemanager.user.appUser.User;
 import com.dhia.pfemanager.pfemanager.user.appUser.UserRole;
 import com.dhia.pfemanager.pfemanager.user.enterprise.Enterprise;
@@ -27,6 +28,9 @@ public class Supervisor extends User {
 
     @OneToMany(mappedBy = "supervisor")
     private List<Intern> internList;
+
+    @OneToMany(mappedBy = "supervisor")
+    private List<Topic> topicList;
 
     public Supervisor(String name, String email, String password, UserRole userRole) {
         this.setName(name);
