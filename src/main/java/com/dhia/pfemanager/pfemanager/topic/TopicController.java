@@ -52,6 +52,13 @@ public class TopicController {
         return ResponseEntity.ok(topicService.getTopicsByIntern(internId));
     }
 
+    @GetMapping("/description/{topicId}")
+    public ResponseEntity<String>getDescriptionByTopicId(
+            @PathVariable("topicId") Integer topicId
+    ){
+        return ResponseEntity.ok(topicService.getDescriptionByTopicId(topicId));
+    }
+
     @PutMapping("/assign/{topicId}/to/intern=/{internId}")
     public void assignTopicToIntern(
             @PathVariable("internId") Integer internId,

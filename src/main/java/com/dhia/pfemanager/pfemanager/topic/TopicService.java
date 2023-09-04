@@ -108,4 +108,11 @@ public class TopicService {
         }
         topicRepository.deleteById(id);
     }
+
+    public String getDescriptionByTopicId(Integer topicId) {
+        if (!topicRepository.existsById(topicId)){
+            throw new EntityNotFoundException("This topic doesn't exist");
+        }
+        return topicRepository.findTopicById(topicId).getDescription();
+    }
 }
