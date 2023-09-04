@@ -203,6 +203,7 @@ public class AuthenticationService {
                 .refreshToken(refreshToken)
                 .userType(userRole)
                 .userId(user.getId())
+                .userName(user.getName())
                 .build();
     }
 

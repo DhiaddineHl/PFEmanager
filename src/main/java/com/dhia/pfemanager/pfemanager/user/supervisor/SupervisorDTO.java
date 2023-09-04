@@ -8,7 +8,7 @@ public record SupervisorDTO(
         String email,
         String phone,
         String speciality,
-        List<String> interns,
+        List<String>  interns,
         List<String> topics
 
 ) {
