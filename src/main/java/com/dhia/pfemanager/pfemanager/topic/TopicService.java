@@ -84,13 +84,16 @@ public class TopicService {
         }
 
 
-
-
         intern.setInternshipTopic(topic);
         topic.setIntern(intern);
         topic.setAvailable(false);
-        topic.setSupervisor(intern.getSupervisor());
-        supervisor.getTopicList().add(topic);
+
+        if(intern.getSupervisor() != null){
+
+            topic.setSupervisor(intern.getSupervisor());
+            supervisor.getTopicList().add(topic);
+
+        }
 
         topicRepository.save(topic);
 

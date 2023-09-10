@@ -1,6 +1,8 @@
 package com.dhia.pfemanager.pfemanager.user.supervisor;
 
 
+import com.dhia.pfemanager.pfemanager.topic.Topic;
+import com.dhia.pfemanager.pfemanager.user.appUser.User;
 import com.dhia.pfemanager.pfemanager.user.intern.InternDTO;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +21,8 @@ public class SupervisorDTOMapper implements Function<Supervisor, SupervisorDTO> 
                         supervisor.getEmail(),
                         supervisor.getPhone(),
                         supervisor.getSpeciality(),
-                        supervisor.getInternList().stream().map(intern -> intern.getName()).collect(Collectors.toList()),
-                        supervisor.getTopicList().stream().map(topic -> topic.getTitle()).collect(Collectors.toList())
+                        supervisor.getInternList().stream().map(User::getName).collect(Collectors.toList()),
+                        supervisor.getTopicList().stream().map(Topic::getTitle).collect(Collectors.toList())
                 )
 
                 ;
