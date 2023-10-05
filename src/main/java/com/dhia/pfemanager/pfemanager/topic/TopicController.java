@@ -16,11 +16,12 @@ public class TopicController {
 
     private final TopicService topicService;
 
-    @PostMapping("/create")
+    @PostMapping("/create/forEnterprise/{enterpriseId}")
     public void createTopic(
-            @RequestBody TopicCreationRequest request
+            @RequestBody TopicCreationRequest request,
+            @PathVariable("enterpriseId") Integer enterpriseId
     ){
-        topicService.createTopic(request);
+        topicService.createTopic(request,enterpriseId);
     }
 
     @DeleteMapping("/delete/{id}")

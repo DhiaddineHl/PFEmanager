@@ -20,6 +20,8 @@ import java.util.List;
 public class Intern extends User {
 
 
+    private Float rating;
+
     @ManyToOne
     @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
