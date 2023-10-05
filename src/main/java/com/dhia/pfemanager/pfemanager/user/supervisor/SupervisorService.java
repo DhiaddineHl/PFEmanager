@@ -2,6 +2,7 @@ package com.dhia.pfemanager.pfemanager.user.supervisor;
 
 
 import com.dhia.pfemanager.pfemanager.exceptions.AlreadyAssignedException;
+import com.dhia.pfemanager.pfemanager.topic.TopicRepository;
 import com.dhia.pfemanager.pfemanager.user.intern.Intern;
 import com.dhia.pfemanager.pfemanager.user.intern.InternRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class SupervisorService {
     private final SupervisorRepository supervisorRepository;
     private final SupervisorDTOMapper supervisorDTOMapper;
     private final InternRepository internRepository;
+    private final TopicRepository topicRepository;
 
     public List<SupervisorDTO> getAllSupervisors() {
         return supervisorRepository.findAll()
@@ -62,6 +64,13 @@ public class SupervisorService {
         //add supervisor to intern supervisorsList
         intern.setSupervisor(supervisor);
         internRepository.save(intern);
+        //
+        if (intern.getInternshipTopic() != null){
+            intern.getInternshipTopic().setSupervisor(supervisor);
+            topicRepository.save(intern.getInternshipTopic());
+        }
+
+
     }
 
 

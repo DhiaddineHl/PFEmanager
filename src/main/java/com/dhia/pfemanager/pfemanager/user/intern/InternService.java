@@ -43,4 +43,9 @@ public class InternService {
                 .map(internDTOMapper)
                 .collect(Collectors.toList());
     }
+
+    public void rateIntern(Integer internId, InternRatingRequest internRatingRequest) {
+        var intern = internRepository.findInternById(internId);
+        intern.setRating(internRatingRequest.getRate());
+    }
 }

@@ -29,8 +29,8 @@ public class TopicService {
     private final InternRepository internRepository;
 
 
-    public void createTopic(TopicCreationRequest request) {
-        Enterprise enterprise = enterpriseRepository.findEnterpriseById(request.getEnterpriseId());
+    public void createTopic(TopicCreationRequest request, Integer enterpriseId) {
+        Enterprise enterprise = enterpriseRepository.findEnterpriseById(enterpriseId);
         var topic = Topic.builder()
                 .title(request.getTitle())
                 .description(request.getDescription())
@@ -72,6 +72,9 @@ public class TopicService {
 //check for topic availability
         if (!topic.isAvailable()){
             throw new TopicNotAvailableException("This topic is not available");
+        }
+        if (intern.getInternshipTopic() != null) {
+            throw new AlreadyAssignedException("This intern already has a internship topic");
         }
 
         if (topic.getIntern() != null) {

@@ -17,7 +17,8 @@ public class InternDTOMapper implements Function<Intern, InternDTO> {
                         intern.getPhone(),
                         intern.getSpeciality(),
                         intern.getInternshipTopic() != null ? intern.getInternshipTopic().getTitle() : "No topic assigned",
-                        intern.getSupervisor() != null ? intern.getSupervisor().getName() : "No supervisor assigned yet"
+                        intern.getSupervisor() != null ? intern.getSupervisor().getName() : "No supervisor assigned yet",
+                        intern.getRating() != null ? intern.getRating() : 0
                 )
 
                 ;
