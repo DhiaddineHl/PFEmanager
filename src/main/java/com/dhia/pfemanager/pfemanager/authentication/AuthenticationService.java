@@ -89,6 +89,8 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .userType("enterprise")
+                .userName(savedEnterprise.getName())
+                .userId(savedEnterprise.getId())
                 .build();
     }
 
@@ -123,6 +125,8 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .userType("intern")
+                .userId(savedIntern.getId())
+                .userName(savedIntern.getName())
                 .build();
     }
 
@@ -157,7 +161,8 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .userType("supervisor")
-                .userId(supervisor.getId())
+                .userId(savedSupervisor.getId())
+                .userName(savedSupervisor.getName())
                 .build();
     }
 
